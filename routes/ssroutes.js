@@ -6,6 +6,7 @@ var formidable = require('formidable');
 var util = require('util');
 var fs = require('fs');
 var Datastore = require('nedb');
+var path = require('path');
 
 
 
@@ -80,6 +81,7 @@ router.post('/imageupload', function (req, res) {
                         uploadImage(fields, files);
                         docs[0].imgFile = files.imgfile.name;
                         docs[0].utimeImageAdded = new Date().getTime();
+                        docs[0].hasTakenPic = true;
                         var thisId = docs[0]._id;
                         db.update({_id : thisId}, docs[0], {}, function(err, numReplaced){
                             console.log("Replaced");
@@ -137,7 +139,8 @@ router.post('/createuser', function (req, res) {
         fields.docType = "user";
         fields.utimeUserCreated = new Date().getTime();
         fields.uploadedToCMS = false;
-        db.insert(fields, function(err, docs){
+        fields.hasTakenPic = false;
+        db.insert(fields, function(err, doc){
             if (err){
                 console.log("Error adding user");
                 res.writeHead(500, {'content-type': 'application/json'});
@@ -146,7 +149,45 @@ router.post('/createuser', function (req, res) {
             } else {
                 console.log("User  created OK!");
                 res.writeHead(200, {'content-type': 'application/json'});
-                res.write('{status: "ok"}');
+                res.write('{status: "ok", userId:'+doc._id+' }');
+                res.end();
+            }
+        });
+
+    });
+});
+
+// curl -X POST -F userId=lyYZ7RhCoMAyqIG http://localhost:3000/ss/getUserById
+// check the userIds in the dbase.json after you have created some for testing.
+router.post('/getUserById', function (req, res) {
+
+
+    // Main entry for this route
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+
+        // Check POST variables. Must have userId
+
+        if (!('userId' in fields)){
+            console.error("ERROR: Must have userId field.");
+            res.writeHead(406, {'content-type': 'application/jason'});
+            res.write('{ status: "error", error: "userId not in parameters."}');
+            res.end();
+            return;
+        }
+
+        var db = new Datastore({filename:"content/nedb/dbase.json", autoload: true});
+
+        db.find({ _id: fields.userId }, function(err, doc){
+            if (err || doc.length==0){
+                console.log("Error finding user");
+                res.writeHead(500, {'content-type': 'application/json'});
+                res.write('{error: "Error finding user"}');
+                res.end();
+            } else {
+                console.log("User  created OK!");
+                res.writeHead(200, {'content-type': 'application/json'});
+                res.write('{status: "ok", data:' + JSON.stringify(doc) +' }');
                 res.end();
             }
         });
@@ -167,7 +208,27 @@ router.post('/test', function(req, res) {
 });
 
 
+//pulls a listing of photos the attract app slideshow
+router.get('/lsPhotos', function(req, res){
 
+    var folder = __dirname + '/../content/images/'
+    fs.readdir(folder, function(err, files){
+        console.log(JSON.stringify(files));
+        var images = [];
+        var allowed = [".png", ".jpg", ".jpeg"];
+        files.forEach(function(f){
+            var ext = path.extname(f);
+            if ( allowed.indexOf(ext) >-1 ){
+                images.push(f)
+            }
+        });
+        res.writeHead(200, {'content-type': 'application/json'});
+        res.write('{status: "ok", data:' + JSON.stringify(images) +' }');
+        res.end();
+
+    })
+
+});
 
 
 module.exports = router;

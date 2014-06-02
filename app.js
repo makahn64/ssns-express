@@ -67,5 +67,7 @@ app.use(function(err, req, res, next) {
     });
 });
 
+var settings = require('./settings_module');
+var ok = settings.getSettings();
 
 module.exports = app;
