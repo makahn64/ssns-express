@@ -23,6 +23,7 @@ exports.getSettings = function(){
         settings.eventName = "No Event Chosen";
         settings.cloudUrl = "http://www.xplorious.com/sharestation";
         exports.setSettings(settings);
+        return settings;
     } else {
         var settingsString = fs.readFileSync(sfname);
         return JSON.parse(settingsString);
