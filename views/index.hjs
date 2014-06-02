@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  <div id="ssbanner"><img src="images/ssbug96.png"/>ShareStation Server Console</div>
+  <div id="main">
+    <h1>ShareStation Node Server is running.</h1>
+  </div>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+<!-- Copy this page to start a new Hogan template. Has the SS logo and banner -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  <div id="ssbanner"><img src="images/ssbug96.png"/>ShareStation Server Console</div>
+  <div id="main">
+      <!-- All your template HTML goes here -->
+  </div>
+
+</html>
