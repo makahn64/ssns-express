@@ -82,3 +82,38 @@ to upload (/upload) and another to test parameters passed up: /upload/test. The 
 writing for the server will be in the routes folder.
 
 /views holds the Hogan template files.
+
+API Calls
+---------
+
+ss/createuser
+
+Adds a new user to the database. Only an email is required. Responds with the userId in the JSON. Everything passed as a param
+is attached to the object that goes into NeDB, completely freeform. See the hair param below.
+
+    curl -X POST -F userEmail=anyemail@email.com -F hair=none http://localhost:3000/ss/createUser
+
+
+ss/imageupload
+
+Uploads an image, usually tagged with the userId (like a nodeId):
+
+Parameters:
+imgfile: the png file to upload
+userId: the unique object Id created by NeDB when the user is created. Analogous to NodeID in drupal, but a string.
+requireUser: optional, defaults to 1 (true), reject the upload if there is no corresponding user in the NeDB
+
+    curl -X POST -F requireUser=1 -F imgfile=@<filename> -F userId:<uniqueString> http://localhost:3000/ss/imageupload
+
+ss/getUserById
+
+Returns the entire structure from the db for a user.
+
+    curl -X POST -F userId=lyYZ7RhCoMAyqIG http://localhost:3000/ss/getUserById
+
+ss/lsPhotos
+
+Returns an ls of the photos folder, for image types only. Will be used by the simple attract app we will write to show
+random photos outside the booth. It's a GET.
+
+    curl http://localhost:3000/ss/lsPhotos
