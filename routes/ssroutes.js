@@ -15,7 +15,7 @@ var path = require('path');
 // Everything in this route module hangs off of /ss (see lines 10 and 36 in app.js)
 
 //
-// curl -X POST -F requireUser=1 -F imgfile=@<filename> -F userId:<uniqueString> http://localhost:3000/ss/imageupload
+// curl -X POST -F requireUser=1 -F imgfile=@<filename> -F userId=<uniqueString> http://localhost:3000/ss/imageupload
 // Parameters:
 // imgfile: the png file to upload
 // userId: the unique object Id created by NeDB when the user is created. Analogous to NodeID in drupal, but a string.
@@ -43,7 +43,7 @@ router.post('/imageupload', function (req, res) {
         fs.rename(temp_path, new_location, function(err) {
             if (err) {
                 console.error("Error renaming uploaded file: " + err);
-                res.writeHead(500, {'content-type': 'application/jason'});
+                res.writeHead(500, {'content-type': 'application/json'});
                 res.write('{ status: "error", error: "Failed moving image to content/images. Maybe permissions or disk space?"}');
                 res.end();
             } else {
@@ -71,7 +71,7 @@ router.post('/imageupload', function (req, res) {
                     if (err || docs.length != 1) {
 
                         console.error("ERROR: Upload parameters incorrect or user not found.");
-                        res.writeHead(406, {'content-type': 'application/jason'});
+                        res.writeHead(406, {'content-type': 'application/json'});
                         res.write('{ status: "error", error: "userId not in database."}');
                         res.end();
                         return;
@@ -96,7 +96,7 @@ router.post('/imageupload', function (req, res) {
         } else {
             // Bad parameters
             console.error("ERROR: Upload parameters incorrect.");
-            res.writeHead(406, {'content-type': 'application/jason'});
+            res.writeHead(406, {'content-type': 'application/json'});
             res.write('{ status: "error", error: "Missing upload file, or userId"}');
             res.end();
         }
@@ -119,7 +119,7 @@ router.post('/createuser', function (req, res) {
 
         if (!('userEmail' in fields)){
             console.error("ERROR: Must have userEmail field.");
-            res.writeHead(406, {'content-type': 'application/jason'});
+            res.writeHead(406, {'content-type': 'application/json'});
             res.write('{ status: "error", error: "userEmail not in parameters."}');
             res.end();
             return;
@@ -170,7 +170,7 @@ router.post('/getUserById', function (req, res) {
 
         if (!('userId' in fields)){
             console.error("ERROR: Must have userId field.");
-            res.writeHead(406, {'content-type': 'application/jason'});
+            res.writeHead(406, {'content-type': 'application/json'});
             res.write('{ status: "error", error: "userId not in parameters."}');
             res.end();
             return;
