@@ -38,7 +38,7 @@ router.post('/imageupload', function (req, res) {
         /* The file name of the uploaded file */
         var file_name = files.imgfile.name;
         /* Location where we want to copy the uploaded file */
-        var new_location = __dirname + '/../content/images/' + file_name;
+        var new_location = __dirname + '/../public/headshots/' + file_name;
 
         fs.rename(temp_path, new_location, function(err) {
             if (err) {
