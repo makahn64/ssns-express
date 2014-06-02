@@ -211,7 +211,7 @@ router.post('/test', function(req, res) {
 //pulls a listing of photos the attract app slideshow
 router.get('/lsPhotos', function(req, res){
 
-    var folder = __dirname + '/../content/images/'
+    var folder = __dirname + '/../public/headshots/'
     fs.readdir(folder, function(err, files){
         console.log(JSON.stringify(files));
         var images = [];
