@@ -19,57 +19,59 @@
 }
 
 
-
+body {
+    margin: 0;
+    background-color: black;
+    overflow: hidden;
+}
 
 .lbcell {
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 36px;
+    margin-bottom: 3.9vh;
     font-family: ubuntu-reg;
-    font-size: 2.60em;
-    padding: 20px;
+    font-size: 3.0vh;
+    padding: 1vh;
     color: white;
     xxborder-bottom: thin dotted #444444;
     opacity: 1;
-    height: 30px;
+    height: 1.56vh;
 
 }
+
 
 .qCell {
     width: 70%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 38px;
+    margin-bottom: 3.9vh;
     font-family: ubuntu-reg;
-    font-size: 2.50em;
-    padding: 20px;
+    font-size: 3.0vh;
+    padding: 0.95vh;
     color: white;
     opacity: 1;
-    height: 30px;
+    height: 1.56vh;
 
 }
 
 .qCellLeft {
     position: absolute;
-    left: 300px;
+    left: 15.6vw;
 }
 
 .qCellRight {
-    aamargin-left: 300px;
+    aamargin-left: 123px;
     position: absolute;
-    left: 1160px;
+    left: 50vw;
     display: inline;
 
 }
 
-.fl {
+.aafl {
     float: left;
-    margin-left: 20px;
+    margin-left: 1vw;
 }
 
-.fc {
-    margin-left: 100px;
+.aafc {
+    margin-left: 5vw;
 }
 
 .fr {
@@ -80,25 +82,9 @@
     zzcolor: #ffff00;
 }
 
-table {
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    font-family: ubuntu-reg;
-}
-
-tr {
-    color: white;
-}
-
-td {
-    font-size: 1.5em;
-    padding: 10px;
-}
 
 .blackfont {
-    color: black;
-    xxborder-bottom: thin dotted #ffffff;
+    color: black !important;
 
 }
 
@@ -116,9 +102,6 @@ td {
     line-height: 100px;
 }
 
-
-
-
 #lb-container {
     position: absolute;
     top: 0;
@@ -128,6 +111,32 @@ td {
     background-size: 100% 100%;
     width: 100%;
     height: 100%;
+    xxxxborder: 5px dashed red;
+}
+
+#lb-table-container {
+    position: absolute;
+    top: 20.3vh;
+    left: 28vw;
+    width: 56%;
+    xxxxborder: 5px dashed yellow;
+
+}
+
+
+.xxxxxxxxlbcell {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3.9vh;
+    font-family: ubuntu-reg;
+    font-size: 4vh;
+    padding: 1vh;
+    color: white;
+    xxborder-bottom: thin dotted #444444;
+    opacity: 1;
+    height: 1.56vh;
+
 }
 
 #q-container {
@@ -139,31 +148,26 @@ td {
     background-size: 100% 100%;
     width: 100%;
     height: 100%;
+    xxxxxborder: 5px dashed red;
+
 }
 
 #q-main-table {
     position: absolute;
-    top: 390px;
-    left: 380px;
+    top: 27.5vh;
+    left: 11vw;
     width: 100%;
-}
+    xxxxborder: 5px dashed greenyellow;
 
-#lb-table-container {
-    position: absolute;
-    top: 290px;
-    left: 300px;
-    width: 80%;
 }
-
 
 #q-next-up {
     position: absolute;
-    top: 290px;
-    left: 660px;
+    top: 21vh;
+    left: 26.55vw;
     width: 100%;
     font-family: ubuntu-reg;
-    font-size: 2.50em;
-    padding: 20px;
+    font-size: 3.0vh;
     color: black;
 }
 
@@ -187,8 +191,8 @@ td {
 }
 
 .fromRight.ng-hide-remove {
-    -webkit-animation: bounceInRightStiff 2750ms;
-    animation: bounceInRightStiff 2750ms;
+    -webkit-animation: bounceInRightStiff 1750ms;
+    animation: bounceInRightStiff 1750ms;
 }
 
 .qCellLeft.ng-hide-remove, .qCellRight.ng-hide-remove {
@@ -216,5 +220,4 @@ td {
 .slide-animate.ng-leave {
     -webkit-animation: fadeOut 0.15s;
     animation: fadeOut 0.15s;
-}
 }

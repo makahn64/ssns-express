@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html ng-app="ngApp" ng-controller="guestController">
+<html ng-app="ngApp" ng-controller="lbController">
 <head>
-    <title>Lexus Racing Game Test Panel</title>
+    <title>Lexus Leaderboard</title>
 
-    <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
+    <link rel="stylesheet" href="stylesheets/animate.css" type="text/css">
+    <link rel="stylesheet" href="stylesheets/ad-animation.css" type="text/css">
+
+    <link rel="stylesheet" href="stylesheets/leaderboard-resp.css" type="text/css">
+
 
     <!-- Third Party Javascript Includes -->
     <script src="ngapps/bower_components/angular/angular.min.js"></script>
@@ -16,69 +20,10 @@
     <!-- App Includes -->
     <script src="js/app.js"></script>
     <!-- <script src="js/network-cache-factories.js"></script> -->
-    <script src="js/guestcontroller.js"></script>
+    <script src="js/lbcontroller.js"></script>
 </head>
 <body>
-<h1>Who's Up? [What the Game Will See thru API]</h1>
-<div class="whos-up">
-    <div ng-if="onDeck">
-        <div> Name: {{onDeck.firstName}} {{onDeck.lastName}}</div>
-        <div> Time: <input ng-model="score.time"/> in milliseconds</div>
-        <button ng-click="recordTime()">Record Time and Dismiss Player</button>
-    </div>
-    <div ng-if="!onDeck">Nobody on-deck...</div>
-
-    </div>
-
-<h1>All Guests [What the Welcome BA Will be Adding To]</h1>
-<p class="info">Welcome BA will only be allowed to add to the Queue, not make queue reassigns. When the Welcome BA adds a guest,
-    they get added to the DB and an ENQUEUE operation happens.</p>
-<div>First Name:
-    <input ng-model="newguest.firstName"/>
-    Last Name:
-    <input ng-model="newguest.lastName"/>
-<button ng-click="postNewGuest()">Register Guest</button></div>
-<div> </div>
-
-<table class="guest-table">
-    <th>FIRST NAME</th><th>LAST NAME</th><th>REG TIME</th><th>ENQUEUE TIME</th>
-    <th>ENQUEUE</th>
-    <tr ng-repeat="guest in guests">
-    <td class="guest-name"> {{guest.firstName}} </td>
-    <td class="guest-name"> {{guest.lastName}} </td>
-    <td> {{guest.msTimeAdded | date : 'short' }} </td>
-    <td> {{guest.queued | date : 'short' }} </td>
-        <td class="button-cell"> <button ng-if="!guest.queued" ng-click="modifyGuest(guest._id, 'ENQ')">Enqueue</button> </td>
-</tr> </table>
-<button ng-click="cleanDB()">Nuke the Whole Guest DB! [there will be no confirmation]</button>
-<!-- Game Queue -->
-<h1>Game Queue [What the Android Starter App will See]</h1>
-
-<table class="guest-table">
-    <th>FIRST NAME</th><th>LAST NAME</th><th>REG TIME</th><th>ENQUEUE TIME</th>
-    <th>WAIT TIME</th><th>DeQUEUE</th><th>WAITLIST</th><th>START</th>
-    <tr ng-repeat="guest in startQueue">
-        <td class="guest-name"> {{guest.firstName}} </td>
-        <td class="guest-name"> {{guest.lastName}} </td>
-        <td> {{guest.msTimeAdded | date : 'short' }} </td>
-        <td> {{guest.queued | date : 'short' }} </td>
-        <td> {{ctime - guest.queued | date : 'mm:ss' }} </td>
-        <td class="button-cell"> <button ng-if="guest.queued" ng-click="modifyGuest(guest._id, 'DEQ')">Dequeue</button> </td>
-        <td class="button-cell" ng-class="{'waitlisted': guest.waitlisted}"> <button ng-if="guest.queued && !guest.waitlisted" ng-click="modifyGuest(guest._id, 'WL')">Waitlist</button> </td>
-        <td class="button-cell"> <button ng-if="guest.queued" ng-click="modifyGuest(guest._id, 'GO')">Next Up</button> </td>
-    </tr> </table>
-
-<h1>Leaderboard</h1>
-
-<table class="guest-table">
-    <th>FIRST NAME</th><th>LAST NAME</th><th>TIME</th>
-    <tr ng-repeat="guest in leaderboard">
-        <td class="guest-name"> {{guest.firstName}} </td>
-        <td class="guest-name"> {{guest.lastName}} </td>
-        <td> {{guest.score | date : 'mm:ss' }} </td>
-    </tr> </table>
-
-<h1>Some Debug Stuff</h1>
-<div>Server Root: {{svrRoot}}</div>
+<!-- <ng-include src="state.nowShowing"></ng-include> -->
+<div ng-include="state.nowShowing" class="slide-animate"></div>
 </body>
 </html>

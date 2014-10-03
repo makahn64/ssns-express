@@ -66,7 +66,7 @@ router.post('/imageupload', function (req, res) {
 
             if (!('requireUser' in fields) || (fields.requireUser == 1)) {
                 // Check if user in DB
-                var db = new Datastore({filename:"content/nedb/dbase.json", autoload: true});
+                var db = new Datastore({filename:"content/nedb/guests.json", autoload: true});
                 db.find({_id: fields.userId}, function (err, docs) {
                     if (err || docs.length != 1) {
 
@@ -211,7 +211,7 @@ router.post('/test', function(req, res) {
 //pulls a listing of photos the attract app slideshow
 router.get('/lsPhotos', function(req, res){
 
-    var folder = __dirname + '/../public/headshots/'
+    var folder = __dirname + '/../public/headshots/';
     fs.readdir(folder, function(err, files){
         console.log(JSON.stringify(files));
         var images = [];

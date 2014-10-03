@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<div id="q-container">
+<h1>Game Queue [What the Android Starter App will See]</h1>
 
-</body>
-</html>
+<table class="guest-table">
+    <th>FIRST NAME</th><th>LAST NAME</th><th>REG TIME</th><th>ENQUEUE TIME</th>
+    <th>WAIT TIME</th><th>DeQUEUE</th><th>WAITLIST</th><th>START</th>
+    <tr ng-repeat="guest in startQueue">
+        <td class="guest-name"> {{guest.firstName}} </td>
+        <td class="guest-name"> {{guest.lastName}} </td>
+        <td> {{guest.msTimeAdded | date : 'short' }} </td>
+        <td> {{guest.queued | date : 'short' }} </td>
+        <td> {{ctime - guest.queued | date : 'mm:ss' }} </td>
+        <td class="button-cell"> <button ng-if="guest.queued" ng-click="modifyGuest(guest._id, 'DEQ')">Dequeue</button> </td>
+        <td class="button-cell" ng-class="{'waitlisted': guest.waitlisted}"> <button ng-if="guest.queued && !guest.waitlisted" ng-click="modifyGuest(guest._id, 'WL')">Waitlist</button> </td>
+        <td class="button-cell"> <button ng-if="guest.queued" ng-click="modifyGuest(guest._id, 'GO')">Next Up</button> </td>
+    </tr> </table>
+</div>

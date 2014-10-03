@@ -1,48 +1,53 @@
 /**
- * This is the main controller for the app and does all the real work of switching screens, etc.
- *
- * It initially loads the Loading screen. A $watcher in the controller for the loading screen (loading-controller.js)
- * triggers a call back to this module that segues to the correct opening screen for the app mode.
+ * This is the Leaderboard controller for the app
  */
 
-app.controller("guestController", function($scope, $http, $interval){
+app.controller("lbController", function($scope, $http, $interval, $timeout){
 
     var SERVER_ROOT = "";
     // running on appdelegates.net, need to move root for ProxyPass in httpd.conf
     if (window.location.hostname.indexOf("appdelegates")>0)
         SERVER_ROOT = "/lexus";
 
+    // Time between each slide-in
+    $scope.intraAnimationDelay = 250;
+
+    $scope.timing = {
+        lbTime: 10000,
+        qTime: 10000
+    }
+
+    $scope.state = {
+        nowShowing: "queue.partial.html",
+        mode: "q"
+    }
+
+    $scope.hideIdx = 10;
+
+    $scope.isHidden = function(idx){
+        return idx < $scope.hideIdx;
+    }
 
     $scope.svrRoot = window.location.hostname + SERVER_ROOT;
 
-    $scope.guests = [];
+    // 10 or less entries
+    $scope.leaderboard = [];
+
+    // 18 or less. Spots 18 thru 2.
     $scope.startQueue = [];
+    // Next up
+    $scope.nextUp = { firstName: "Bad Mutha",
+        lastName: "Fucker" };
+
+    // Only here if the client wants to add it
     $scope.onDeck = null;
-    $scope.score = {
-        time: 0
-    };
 
-    $scope.ctime = new Date().getTime();
-
-
-    $scope.newguest = {
-        lastName: "",
-        firstName: ""
-    };
-
-    $scope.refreshAllGuests = function(){
-
-        $http({method: 'GET', url: SERVER_ROOT + '/guests/allguests'}).
-            success(function(data, status, headers, config) {
-                // this callback will be called asynchronously
-                // when the response is available
-                $scope.guests = data;
-            }).
-            error(function(data, status, headers, config) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-            });
-    };
+    $scope.setColor = function(idx){
+        if (idx==0)
+            return { color: "black"};
+        else
+            return {color: "white"};
+    }
 
     $scope.refreshStartQueue = function(){
 
@@ -51,6 +56,9 @@ app.controller("guestController", function($scope, $http, $interval){
                 // this callback will be called asynchronously
                 // when the response is available
                 $scope.startQueue = data;
+                $scope.nextUp = $scope.startQueue.shift();
+                if ($scope.state.mode=="q")
+                    $scope.hideIdx = $scope.startQueue.length-1;
             }).
             error(function(data, status, headers, config) {
                 // called asynchronously if an error occurs
@@ -60,11 +68,17 @@ app.controller("guestController", function($scope, $http, $interval){
 
     $scope.refreshLB = function(){
 
+        $scope.leaderboard = [];
+        //$scope.preAnimate();
+
         $http({method: 'GET', url: SERVER_ROOT + '/guests/leaderboard'}).
             success(function(data, status, headers, config) {
                 // this callback will be called asynchronously
                 // when the response is available
                 $scope.leaderboard = data;
+                if ($scope.state.mode=="lb")
+                    $scope.hideIdx = $scope.leaderboard.length-1;
+                //$scope.postAnimate();
             }).
             error(function(data, status, headers, config) {
                 // called asynchronously if an error occurs
@@ -80,6 +94,7 @@ app.controller("guestController", function($scope, $http, $interval){
                 // this callback will be called asynchronously
                 // when the response is available
                 $scope.onDeck = data.onDeck;
+
             }).
             error(function(data, status, headers, config) {
                 // called asynchronously if an error occurs
@@ -91,112 +106,81 @@ app.controller("guestController", function($scope, $http, $interval){
             });
     };
 
+    $scope.getTiming = function(){
 
-    $scope.postNewGuest = function(){
-
-        $http({method: 'POST', url: SERVER_ROOT + '/guests/register', data: { data: $scope.newguest }} ).
+        $http({method: 'GET', url: SERVER_ROOT + '/guests/lbtiming'}).
             success(function(data, status, headers, config) {
                 // this callback will be called asynchronously
                 // when the response is available
-                $scope.newguest = {
-                    lastName: "",
-                    firstName: ""
-                };
-                $scope.refreshAllGuests();
-             }).
+                $scope.timing = data;
+            }).
             error(function(data, status, headers, config) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
-                console.log("ERROR: "+data.toString());
+
+                console.log("Problem getting on timing info");
             });
     };
 
-    $scope.modifyGuest = function(dbId, action){
 
-        var verb;
+    //$scope.refreshStartQueue();
+    /*
+    $timeout(function(){
+        $scope.refreshLB();
+    }, 2000);
+    */
 
-        switch(action){
-            case 'ENQ':
-                verb = "queue";
-                break;
+    $scope.runAnimation = function(){
 
-            case 'DEQ':
-                verb = "dequeue";
-                break;
+        $timeout(function(){
+            console.log("Hide index: "+$scope.hideIdx);
+            $scope.hideIdx--;
+            if ($scope.hideIdx>0)
+                $scope.runAnimation();
 
-            case 'WL':
-                verb = "waitlist";
-                break;
+        }, $scope.intraAnimationDelay);
 
-            case 'GO':
-                verb = "nextup";
-                break;
-
-
-         }
-
-        if (verb){
-
-            $http({method: 'POST', url: SERVER_ROOT + '/guests/'+verb+"/"+dbId } ).
-                success(function(data, status, headers, config) {
-                    // this callback will be called asynchronously
-                    // when the response is available
-                    $scope.refreshAllGuests();
-                    $scope.refreshStartQueue();
-
-                }).
-                error(function(data, status, headers, config) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
-                    console.log("ERROR: "+data.toString());
-                });
-
-        }
     }
 
-    $scope.cleanDB = function(){
+    $scope.refreshAll = function(){
 
-        $http({method: 'POST', url: SERVER_ROOT + '/guests/eraseall' } ).
-            success(function(data, status, headers, config) {
-                // this callback will be called asynchronously
-                // when the response is available
-                $scope.refreshAllGuests();
-                $scope.refreshStartQueue();
+        $scope.refreshStartQueue();
+        $scope.refreshLB();
+        $scope.runAnimation();
+        $scope.getTiming();
+        console.log("Height: "+window.screen.availHeight);
+        console.log("Width: "+window.screen.availWidth);
 
-            }).
-            error(function(data, status, headers, config) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-                console.log("ERROR: "+data.toString());
-            });
+    }
 
-    };
+    /*
+    $interval(function(){
+        $scope.nextUp ="";
+        $scope.refreshAll();
+    }, 30000);
 
-    $scope.recordTime = function(){
+     */
 
-        $http({method: 'POST', url: SERVER_ROOT + '/guests/recordTime/'+$scope.score.time } ).
-            success(function(data, status, headers, config) {
-                // this callback will be called asynchronously
-                // when the response is available
-                $scope.refreshAllGuests();
-                $scope.refreshStartQueue();
-
-            }).
-            error(function(data, status, headers, config) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-                console.log("ERROR: "+data.toString());
-            });
-
-    };
-
-    $scope.refreshAllGuests();
-    $scope.refreshStartQueue();
+    $timeout(function(){
+        $scope.refreshAll();
+    }, 1500);
 
     $interval(function(){
-        $scope.refreshOnDeck();
-        $scope.refreshLB();
-        $scope.ctime = new Date().getTime();
-    }, 1000);
+
+
+        if ($scope.state.mode=="q"){
+            $scope.state.mode="lb";
+            $scope.state.nowShowing="leaders.partial.html"
+        } else {
+            $scope.hideIdx = 20;
+            $scope.nextUp = "";
+            $scope.state.mode="q";
+            $scope.state.nowShowing="queue.partial.html"
+        }
+
+
+        $scope.refreshAll();
+
+    }, 15000);
 
 });

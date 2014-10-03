@@ -4,11 +4,10 @@
 
  */
 
-app.controller("page1Controller", function($scope){
+app.controller("page2Controller", function($scope){
 
-
-    $scope.model  =  {};
-    $scope.model.word = "Bird!";
+    $scope.pageName = "Who Do You Need to Talk To?";
+    $scope.talkToChoices = ["My Parents", "My Auntie", "My Dog", "My Kids", "A Hobo"];
 
 
 });

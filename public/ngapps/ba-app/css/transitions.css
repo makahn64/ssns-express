@@ -1,0 +1,135 @@
+
+
+.popupAnimation.ng-enter {
+    -webkit-animation: 0.5s bounceIn;
+    display: inline-block;
+}
+
+
+.popupAnimation.ng-leave {
+    -webkit-animation: 0.25s bounceOut;
+    display: inline-block;
+}
+
+
+@-webkit-keyframes bounceIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        transform: scale(.3);
+    }
+
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.05);
+        transform: scale(1.05);
+    }
+
+    70% {
+        -webkit-transform: scale(.9);
+        transform: scale(.9);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes bounceOut {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    25% {
+        -webkit-transform: scale(.95);
+        transform: scale(.95);
+    }
+
+    50% {
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(.3);
+        transform: scale(.3);
+    }
+}
+
+.xfadeAnimation.ng-enter {
+    -webkit-animation: 0.25s fin;
+}
+
+
+.xfadeAnimation.ng-leave {
+    -webkit-animation: 0.25s fout;
+}
+
+@-webkit-keyframes fin {
+    from { opacity:0; }
+    to { opacity:1; }
+}
+
+@-webkit-keyframes fout {
+    from { opacity:1; }
+    to { opacity:0; }
+}
+
+.slide.ng-enter {
+    /*left:-100%;*/
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    display: inline-block;
+
+}
+
+.slide.ng-enter-active {
+    /*left:0;*/
+    -webkit-transform: translateX(0%);
+    display: inline-block;
+
+}
+
+.slide.ng-leave {
+    /*left:0;*/
+    -webkit-transform: translateX(0%);
+    display: inline-block;
+
+}
+
+.slide.ng-leave-active {
+    /*left:100%;*/
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    display: inline-block;
+
+}
+
+/*
+.popupAnimation.ng-enter {
+    z-index: 1000;
+    opacity: 0.25;
+    zoom: 0.1;
+    top: 36%;
+}
+.popupAnimation.ng-enter-active {
+    opacity: 1;
+    zoom: 1;
+    top: 0%;
+}
+.popupAnimation.ng-leave {
+    opacity: 1;
+    zoom: 1;
+    top: 0%;
+}
+.popupAnimation.ng-leave-active {
+    opacity: 0;
+    zoom: 0.01;
+    top: 36%;
+}
+*/

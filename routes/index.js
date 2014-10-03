@@ -5,7 +5,7 @@ var settings = require("../settings_module.js");
 /* GET home page. */
 router.get('/', function(req, res) {
   var s = settings.getSettings();
-  res.render('index', { title: 'ShareStation Server', eventId: s.eventId, eventName: s.eventName });
+  res.render('index', { title: 'Lexus Racing Challenge', eventId: s.eventId, eventName: s.eventName });
 });
 
 router.post('/settings', function(req, res){

@@ -2,7 +2,7 @@
  * This is the Leaderboard controller for the app
  */
 
-app.controller("lbController", function($scope, $http, $interval, $timeout){
+app.controller("lbController2", function($scope, $http, $interval, $timeout){
 
     var SERVER_ROOT = "";
     // running on appdelegates.net, need to move root for ProxyPass in httpd.conf
@@ -12,7 +12,19 @@ app.controller("lbController", function($scope, $http, $interval, $timeout){
 
     $scope.svrRoot = window.location.hostname + SERVER_ROOT;
 
-    $scope.leaderboard = [];
+    $scope.leaderboard = [
+        { firstName: "", lastName: "", time: "" }, //1
+        { firstName: "", lastName: "", time: "" }, //2
+        { firstName: "", lastName: "", time: "" }, //3
+        { firstName: "", lastName: "", time: "" }, //4
+        { firstName: "", lastName: "", time: "" }, //5
+        { firstName: "", lastName: "", time: "" }, //6
+        { firstName: "", lastName: "", time: "" }, //7
+        { firstName: "", lastName: "", time: "" }, //8
+        { firstName: "", lastName: "", time: "" }, //9
+        { firstName: "", lastName: "", time: "" }  //10
+    ];
+
     $scope.startQueue = [];
 
     // Only here if the client wants to add it
@@ -108,6 +120,6 @@ app.controller("lbController", function($scope, $http, $interval, $timeout){
     }, 5000);
 
     $scope.state = {
-        nowShowing: "leaders.partial.html"
+        nowShowing: "leaders2.partial.html"
     }
 });

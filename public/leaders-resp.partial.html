@@ -1,5 +1,6 @@
-<div id="lb-container">
-<div id="lb-table-container">
+<div id="outermost" class="lb-window-bg">
+    <div class="topspacer"></div>
+<div class="listholder">
     <div ng-class="{ 'blackfont': $index==0}" class="lbcell" id="cell-{{$index}}" ng-repeat="guest in leaderboard | limitTo:10">
         <!-- <span ng-class-even="'fromRight'" ng-class-odd="'fromLeft'" class="fl ra" ng-hide="isHidden($index)">{{$index+1 | numberFixedLen:3}}</span> -->
         <span  class="fromRight fc ra" ng-hide="isHidden($index)">{{guest.firstName | uppercase }} {{guest.lastName | firstInitial}}</span>

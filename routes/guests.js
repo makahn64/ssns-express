@@ -5,230 +5,409 @@ var router = express.Router();
 var formidable = require('formidable');
 var util = require('util');
 var fs = require('fs');
-var Datastore = require('nedb');
 var path = require('path');
 
+var settings = require("../settings_module.js");
+var appSettings = settings.getSettings();
 
 
+var fullpath = path.resolve(path.join(__dirname,"../content/nedb/guests.json"));
+var lpath = "content/nedb/guests.json";
 
+var Datastore = require('nedb'), db = new Datastore({filename:fullpath, autoload: true});
 
-// Everything in this route module hangs off of /ss (see lines 10 and 36 in app.js)
+var logMsg = function(type, message){
+    db.insert({ docType: "log", message: message, type: type, time: (new Date()).getTime() });
+}
 
-//
-// curl -X POST -F requireUser=1 -F imgfile=@<filename> -F userId=<uniqueString> http://localhost:3000/ss/imageupload
-// Parameters:
-// imgfile: the png file to upload
-// userId: the unique object Id created by NeDB when the user is created. Analogous to NodeID in drupal, but a string.
-// requireUser: optional, defaults to 1 (true), reject the upload if there is no corresponding user in the NeDB
-//
+router.get('/register', function (req, res) {
 
+    res.writeHead(200, {'content-type': 'text/html'});
+    res.write('<h1>Register GET</h1>');
+    res.end();
 
-router.post('/imageupload', function (req, res) {
+});
 
-    /**
-     * This local function is called from various places within the route code.
-     * The params come from formidable.
-     * @param fields
-     * @param files
-     */
-    function uploadImage(fields, files){
+router.post('/register', function (req, res) {
 
-        /* Temporary location of our uploaded file */
-        var temp_path = files.imgfile.path;
-        /* The file name of the uploaded file */
-        var file_name = files.imgfile.name;
-        /* Location where we want to copy the uploaded file */
-        var new_location = __dirname + '/../public/headshots/' + file_name;
+    if (req.body.data!=undefined){
 
-        fs.rename(temp_path, new_location, function(err) {
-            if (err) {
-                console.error("Error renaming uploaded file: " + err);
-                res.writeHead(500, {'content-type': 'application/json'});
-                res.write('{ status: "error", error: "Failed moving image to content/images. Maybe permissions or disk space?"}');
-                res.end();
-            } else {
-                console.log("File uploaded OK!");
-                res.writeHead(200, {'content-type': 'application/json'});
-                res.write('{status: "ok"}');
-                res.end();
-            }
+        var s = settings.getSettings();
+
+        var guestData = req.body.data;
+        guestData['msTimeAdded'] = new Date().getTime();
+        guestData['eventName'] = s.eventName;
+        guestData['docType'] = "guest";
+        db.insert(guestData, function(err, doc){
+            console.log("Inserted!");
+            res.writeHead(200, {'content-type': 'application/json'});
+            res.write(JSON.stringify(doc));
+            res.end();
+
         });
-
+    } else {
+        res.writeHead(400, {'content-type': 'application/json'});
+        res.write(JSON.stringify({error: "malformed request"}));
+        res.end();
     }
 
-
-    // Main entry for this route
-    var form = new formidable.IncomingForm();
-    form.parse(req, function (err, fields, files) {
-
-        // Check POST variables
-        if (('imgfile' in files) && ('userId' in fields)) {
-
-            if (!('requireUser' in fields) || (fields.requireUser == 1)) {
-                // Check if user in DB
-                var db = new Datastore({filename:"content/nedb/dbase.json", autoload: true});
-                db.find({_id: fields.userId}, function (err, docs) {
-                    if (err || docs.length != 1) {
-
-                        console.error("ERROR: Upload parameters incorrect or user not found.");
-                        res.writeHead(406, {'content-type': 'application/json'});
-                        res.write('{ status: "error", error: "userId not in database."}');
-                        res.end();
-                        return;
-
-                    } else {
-                        // Upload the image to /content/images and add the file to the users DB entry.
-                        uploadImage(fields, files);
-                        docs[0].imgFile = files.imgfile.name;
-                        docs[0].utimeImageAdded = new Date().getTime();
-                        docs[0].hasTakenPic = true;
-                        var thisId = docs[0]._id;
-                        db.update({_id : thisId}, docs[0], {}, function(err, numReplaced){
-                            console.log("Replaced");
-                        });
-                        return;
-                    }
-                });
-            } else {
-                // We must have an override of the user lookup, just upload, do nothing with DB
-                uploadImage(fields, files);
-            }
-        } else {
-            // Bad parameters
-            console.error("ERROR: Upload parameters incorrect.");
-            res.writeHead(406, {'content-type': 'application/json'});
-            res.write('{ status: "error", error: "Missing upload file, or userId"}');
-            res.end();
-        }
-
-    });
 });
 
+/*
+  USAGE:
+  queue/<dbid>
 
-// curl -X POST -F userEmail=mitch@appdelegates.com -F hair=none http://localhost:3000/ss/createUser
+  Returns queue-time, wait-time, queue-depth
 
-router.post('/createuser', function (req, res) {
+  guest has: "queued" property added to them.
 
+  Eventually this should be somehow tied to each activation to have "lines". Or we could have a Queue DB per activation...
 
-    // Main entry for this route
-    var form = new formidable.IncomingForm();
-    form.parse(req, function (err, fields, files) {
+ */
 
-        // Check POST variables
-        // At a minimum, we must have a userEmail
+router.post('/queue/:dbid', function (req, res) {
 
-        if (!('userEmail' in fields)){
-            console.error("ERROR: Must have userEmail field.");
-            res.writeHead(406, {'content-type': 'application/json'});
-            res.write('{ status: "error", error: "userEmail not in parameters."}');
-            res.end();
-            return;
-        }
+    var dbId = req.params.dbid;
 
-        //TODO the upload function is private to the function above and sends a 200 out
-        // and this needs to change so the route code has
-        //control. The first use of ssns won't use this feature anyway
-        // We can take the photo with the user data in one shot just by attaching
-        //if ( 'imgfile' in files )
-        //    fields.imgFile = uploadImage(fields, files);
-
-
-        var db = new Datastore({filename:"content/nedb/dbase.json", autoload: true});
-
-        // We're pretty losey-goosey with the document structure, whatever comes up, goes in.
-        fields.docType = "user";
-        fields.utimeUserCreated = new Date().getTime();
-        fields.uploadedToCMS = false;
-        fields.hasTakenPic = false;
-        db.insert(fields, function(err, doc){
-            if (err){
-                console.log("Error adding user");
-                res.writeHead(500, {'content-type': 'application/json'});
-                res.write('{error: err}');
-                res.end();
-            } else {
-                console.log("User  created OK!");
+    if (dbId!=undefined){
+        var s = settings.getSettings();
+        var qt = new Date().getTime();
+        db.update({ _id: dbId }, { $set: { queued: qt }}, {}, function(err, numReplaced){
+            if (numReplaced==1){
+                // normal operation
                 res.writeHead(200, {'content-type': 'application/json'});
-                res.write('{status: "ok", userId:'+doc._id+' }');
+                res.write(JSON.stringify({result:"ok", enqueueTime: qt}));
                 res.end();
-            }
-        });
-
-    });
-});
-
-// curl -X POST -F userId=lyYZ7RhCoMAyqIG http://localhost:3000/ss/getUserById
-// check the userIds in the dbase.json after you have created some for testing.
-router.post('/getUserById', function (req, res) {
-
-
-    // Main entry for this route
-    var form = new formidable.IncomingForm();
-    form.parse(req, function (err, fields, files) {
-
-        // Check POST variables. Must have userId
-
-        if (!('userId' in fields)){
-            console.error("ERROR: Must have userId field.");
-            res.writeHead(406, {'content-type': 'application/json'});
-            res.write('{ status: "error", error: "userId not in parameters."}');
-            res.end();
-            return;
-        }
-
-        var db = new Datastore({filename:"content/nedb/dbase.json", autoload: true});
-
-        db.find({ _id: fields.userId }, function(err, doc){
-            if (err || doc.length==0){
-                console.log("Error finding user");
+            } else if (numReplaced==0){
+                // User not registered
+                res.writeHead(404, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result:"no such user"}));
+                res.end();
+            } else if (err){
                 res.writeHead(500, {'content-type': 'application/json'});
-                res.write('{error: "Error finding user"}');
-                res.end();
-            } else {
-                console.log("User  created OK!");
-                res.writeHead(200, {'content-type': 'application/json'});
-                res.write('{status: "ok", data:' + JSON.stringify(doc) +' }');
+                res.write(JSON.stringify({result:"error accessing db: "+err.toString()}));
                 res.end();
             }
         });
 
-    });
-});
-
-// This dumps out whatever shows up in the form. Good for testing.
-router.post('/test', function(req, res) {
-    //res.render('stub', { title: 'Debug Stub', stubtext:'Upload requested!' });
-
-    var form = new formidable.IncomingForm();
-    form.parse(req, function(err, fields, files) {
-        res.writeHead(200, {'content-type': 'text/plain'});
-        res.write('received upload:\n\n');
-        res.end(util.inspect({fields: fields, files: files}));
-    });
-});
-
-
-//pulls a listing of photos the attract app slideshow
-router.get('/lsPhotos', function(req, res){
-
-    var folder = __dirname + '/../public/headshots/';
-    fs.readdir(folder, function(err, files){
-        console.log(JSON.stringify(files));
-        var images = [];
-        var allowed = [".png", ".jpg", ".jpeg"];
-        files.forEach(function(f){
-            var ext = path.extname(f);
-            if ( allowed.indexOf(ext) >-1 ){
-                images.push(f)
-            }
-        });
-        res.writeHead(200, {'content-type': 'application/json'});
-        res.write('{status: "ok", data:' + JSON.stringify(images) +' }');
+    } else {
+        res.writeHead(400, {'content-type': 'application/json'});
+        res.write(JSON.stringify({result:"malformed request, maybe no db id?"}));
         res.end();
+    }
 
+});
+
+router.post('/waitlist/:dbid', function (req, res) {
+
+    var dbId = req.params.dbid;
+
+    if (dbId!=undefined){
+        var s = settings.getSettings();
+        var qt = new Date().getTime();
+        db.update({ _id: dbId, queued: { $exists:true }  }, { $set: { waitlisted: qt }}, {}, function(err, numReplaced){
+            if (numReplaced==1){
+                // normal operation
+                res.writeHead(200, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result:"ok", waitlistTime: qt}));
+                res.end();
+            } else if (numReplaced==0){
+                // User not registered
+                res.writeHead(404, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result:"no such user in queue"}));
+                res.end();
+            } else if (err){
+                res.writeHead(500, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result:"error accessing db: "+err.toString()}));
+                res.end();
+            }
+        });
+
+    } else {
+        res.writeHead(400, {'content-type': 'application/json'});
+        res.write(JSON.stringify({result:"malformed request, maybe no db id?"}));
+        res.end();
+    }
+
+});
+
+router.post('/dequeue/:dbid', function (req, res) {
+
+    var dbId = req.params.dbid;
+
+    if (dbId!=undefined){
+        var s = settings.getSettings();
+        var qt = new Date().getTime();
+        db.update({ _id: dbId }, { $unset: { queued: true , waitlisted:true} }, {}, function(err, numReplaced){
+            if (numReplaced==1){
+                // normal operation
+                res.writeHead(200, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result:"ok"}));
+                res.end();
+            } else if (numReplaced==0){
+                // User not registered
+                res.writeHead(404, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result:"no such user"}));
+                res.end();
+            } else if (err){
+                res.writeHead(500, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result:"error accessing db: "+err.toString()}));
+                res.end();
+            }
+        });
+
+    } else {
+        res.writeHead(400, {'content-type': 'application/json'});
+        res.write(JSON.stringify({result:"malformed request, maybe no db id?"}));
+        res.end();
+    }
+
+});
+
+router.post('/nextup/:dbid', function (req, res) {
+
+    var dbId = req.params.dbid;
+
+    if (dbId!=undefined){
+        var qt = new Date().getTime();
+        db.update({ _id: dbId }, { $unset: { queued: true , waitlisted:true, archived:true} }, {}, function(err, numReplaced){
+            if (numReplaced==1){
+                // normal operation
+                res.writeHead(200, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result:"ok"}));
+                res.end();
+                appSettings.nextUp = dbId;
+                logMsg("info", "Guest _id: "+dbId + " moved to on deck");
+            } else if (numReplaced==0){
+                // User not registered
+                res.writeHead(404, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result:"no such user"}));
+                res.end();
+            } else if (err){
+                res.writeHead(500, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result:"error accessing db: "+err.toString()}));
+                res.end();
+            }
+        });
+
+    } else {
+        res.writeHead(400, {'content-type': 'application/json'});
+        res.write(JSON.stringify({result:"malformed request, maybe no db id?"}));
+        res.end();
+    }
+
+});
+
+
+router.post('/recordTime/:rtime', function (req, res) {
+
+
+    var rtime = parseInt( req.params.rtime );
+
+    if ( rtime>0 ){
+
+        db.update({ _id: appSettings.nextUp }, { $set: { score : rtime} }, {}, function(err, numReplaced){
+            if (numReplaced==1){
+                // normal operation
+                res.writeHead(200, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result:"ok"}));
+                res.end();
+                appSettings.nextUp = null;
+            } else if (numReplaced==0){
+                // User not registered
+                res.writeHead(409, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result:"on deck ID not in DB"}));
+                res.end();
+                logMsg("error", "RecordTime called with no one on deck!");
+                appSettings.nextUp = null;
+            } else if (err){
+                res.writeHead(500, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result:"error accessing db: "+err.toString()}));
+                res.end();
+            }
+        });
+
+    } else {
+        res.writeHead(400, {'content-type': 'application/json'});
+        res.write(JSON.stringify({result:"malformed request, maybe no time?"}));
+        res.end();
+    }
+
+});
+
+router.post('/recordTimeByDbId/:dbid/:rtime', function (req, res) {
+
+
+    var rtime = parseInt( req.params.rtime );
+    var dbid = req.params.dbid;
+
+    if ( rtime>0 && dbid!=undefined){
+
+        db.update({ _id: dbid }, { $set: { score : rtime} }, {}, function(err, numReplaced){
+            if (numReplaced==1){
+                // normal operation
+                res.writeHead(200, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result:"ok"}));
+                res.end();
+                appSettings.nextUp = null;
+            } else if (numReplaced==0){
+                // User not registered
+                res.writeHead(409, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result:"on deck ID not in DB"}));
+                res.end();
+            } else if (err){
+                res.writeHead(500, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result:"error accessing db: "+err.toString()}));
+                res.end();
+            }
+        });
+
+    } else {
+        res.writeHead(400, {'content-type': 'application/json'});
+        res.write(JSON.stringify({result:"malformed request, maybe no time?"}));
+        res.end();
+    }
+
+});
+
+router.get('/nextup', function (req, res) {
+
+
+    if (appSettings.nextUp==null){
+        res.writeHead(404, {'content-type': 'application/json'});
+        res.write(JSON.stringify({result:"no one on deck"}));
+        res.end();
+    } else {
+        db.find({ _id: appSettings.nextUp}, function(err, docs){
+            res.writeHead(200, {'content-type': 'application/json'});
+            res.write(JSON.stringify({ onDeck: docs[0] }));
+            res.end();
+        });
+    }
+
+});
+
+router.get('/test', function (req, res) {
+
+    res.writeHead(200, {'content-type': 'text/html'});
+    res.write('<h1>Guests Module is Running</h1>');
+    res.end();
+
+});
+
+router.get('/allguests', function (req, res) {
+
+    db = new Datastore({filename:fullpath, autoload: true});
+    db.find({ docType: "guest" }, function(err, docs){
+        if (!err){
+            res.writeHead(200, {'content-type': 'application/json'});
+            res.write(JSON.stringify(docs));
+            res.end();
+        } else {
+            res.writeHead(500, {'content-type': 'application/json'});
+            res.write(JSON.stringify({ data: "bad db error"}));
+            res.end();
+        }
     })
 
 });
 
+router.get('/allqueued', function (req, res) {
+
+    db.find({ docType: "guest", queued: { $exists: true}, waitlisted: { $exists: false} }).sort({ queued: 1 }).exec( function(err, docs){
+        if (!err){
+            res.writeHead(200, {'content-type': 'application/json'});
+            res.write(JSON.stringify(docs));
+            res.end();
+        } else {
+            res.writeHead(500, {'content-type': 'application/json'});
+            res.write(JSON.stringify({ data: "bad db error"}));
+            res.end();
+        }
+    })
+
+});
+
+
+router.get('/allwaitlist', function (req, res) {
+
+    db.find({ docType: "guest", queued: { $exists: true} , waitlisted: { $exists: true} }).sort({ queued: 1 }).exec( function(err, docs){
+        if (!err){
+            res.writeHead(200, {'content-type': 'application/json'});
+            res.write(JSON.stringify(docs));
+            res.end();
+        } else {
+            res.writeHead(500, {'content-type': 'application/json'});
+            res.write(JSON.stringify({ data: "bad db error"}));
+            res.end();
+        }
+    })
+
+});
+
+router.get('/leaderboard', function (req, res) {
+
+    db.find({ docType: "guest", score: { $exists: true}, archived: { $exists: false } }).sort({ score: 1 }).exec( function(err, docs){
+        if (!err){
+            res.writeHead(200, {'content-type': 'application/json'});
+            res.write(JSON.stringify(docs));
+            res.end();
+        } else {
+            res.writeHead(500, {'content-type': 'application/json'});
+            res.write(JSON.stringify({ data: "bad db error"}));
+            res.end();
+        }
+    })
+
+});
+
+router.post('/eraseall', function (req, res) {
+
+    db.remove({},{multi: true}, function(err, numNuked){
+            console.log("Wiped!");
+            res.writeHead(200, {'content-type': 'application/json'});
+            res.write(JSON.stringify({ removed: numNuked }));
+            res.end();
+
+        });
+
+});
+
+router.post('/clearlb', function (req, res) {
+
+    db.update({ docType: "guest", score: { $exists: true} }, { $set: { archived : true } }, { multi: true }, function(err, numReplaced){
+
+            res.writeHead(200, {'content-type': 'application/json'});
+            res.write(JSON.stringify({result:"ok"}));
+            res.end();
+
+    });
+
+});
+
+router.post('/archive/:dbid', function (req, res) {
+
+    var dbId = req.params.dbid;
+
+    if (dbId != undefined) {
+        db.update({ _id: dbId }, { $set: { archived: true} }, {}, function (err, numReplaced) {
+            if (numReplaced == 1) {
+                // normal operation
+                res.writeHead(200, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result: "ok"}));
+                res.end();
+            } else if (numReplaced == 0) {
+                // User not registered
+                res.writeHead(404, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result: "no such user"}));
+                res.end();
+            } else if (err) {
+                res.writeHead(500, {'content-type': 'application/json'});
+                res.write(JSON.stringify({result: "error accessing db: " + err.toString()}));
+                res.end();
+            }
+        });
+    };
+});
 
 module.exports = router;

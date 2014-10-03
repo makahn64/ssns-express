@@ -1,10 +1,10 @@
-<div id="lb-container">
-<div id="topbanner"></div>
-<div id="lb-table-container">
-    <div ng-class="{ 'blackfont': $index==0}" class="lbcell" id="cell-{{$index}}" ng-repeat="guest in leaderboard | limitTo:10">
-        <span ng-class-even="'fromRight'" ng-class-odd="'fromLeft'" class="fl ra" ng-hide="isHidden($index)">{{$index+1 | numberFixedLen:3}}</span>
-        <span ng-class-even="'fromRight'" ng-class-odd="'fromLeft'" class="fc ra" ng-hide="isHidden($index)">{{guest.firstName | uppercase }} {{guest.lastName | firstInitial}}</span>
-        <span ng-class-even="'fromRight'" ng-class-odd="'fromLeft'" class="fr ra" ng-hide="isHidden($index)"> 00:{{guest.score | date : 'mm:ss' }} </span>
+<div id="q-container">
+<!--<div id="topbanner"></div>-->
+<div ng-if="nextUp!=undefined" ng-hide="isHidden(0)" class="fromRight" id="q-next-up">{{nextUp.firstName | uppercase }} {{nextUp.lastName | firstInitial}}</div>
+<div id="q-main-table">
+    <div class="qCell" id="cell-{{$index}}" ng-repeat="guest in startQueue | limitTo:9">
+        <span class="qCellLeft" class="fl ra" ng-hide="isHidden($index)">{{guest.firstName | uppercase }} {{guest.lastName | firstInitial}}</span>
+        <span ng-if="startQueue[$index+9]!=undefined" class="qCellRight" class="fl ra" ng-hide="isHidden($index+9)">{{startQueue[$index+9].firstName | uppercase }} {{startQueue[$index+9].lastName | firstInitial}}</span>
     </div>
 </div>
 </div>

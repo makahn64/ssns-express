@@ -22,6 +22,9 @@
 body {
     margin: 0;
     background-color: black;
+    color: #ffffff;
+    font-family: ubuntu-reg;
+    font-size: 4vh;
 }
 
 .lbcell {
@@ -37,31 +40,9 @@ body {
 }
 
 
-.qCell {
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 3.9vh;
-    font-family: ubuntu-reg;
-    font-size: 4.0vh;
-    padding: 0.95vh;
-    color: white;
-    opacity: 1;
-    height: 1.56vh;
-
-}
-
-.qCellLeft {
-    position: absolute;
-    left: 15.6vw;
-}
-
-.qCellRight {
-    aamargin-left: 123px;
-    position: absolute;
-    left: 50vw;
-    display: inline;
-
+.lb-header {
+    color: #ffffff;
+    font-size: 4vh;
 }
 
 .aafl {
@@ -115,64 +96,13 @@ body {
 
 #lb-table-container {
     position: absolute;
-    top: 19.4vh;
-    left: 28vw;
+    top: 10vh;
+    left: 10vw;
     width: 56%;
-    xxxxborder: 5px dashed yellow;
+    border: 5px dashed yellow;
 
 }
 
-
-.xxxxxxxxlbcell {
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 3.9vh;
-    font-family: ubuntu-reg;
-    font-size: 4vh;
-    padding: 1vh;
-    color: white;
-    xxborder-bottom: thin dotted #444444;
-    opacity: 1;
-    height: 1.56vh;
-
-}
-
-#q-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: orange;
-    background: url(../images/rcfrift_race_queue_bgAll.png);
-    background-size: 100% 100%;
-    width: 100%;
-    height: 100%;
-    xxxxxborder: 5px dashed red;
-
-}
-
-#q-main-table {
-    position: absolute;
-    top: 27vh;
-    left: 11vw;
-    width: 100%;
-    xxxxborder: 5px dashed greenyellow;
-
-}
-
-#q-next-up {
-    position: absolute;
-    top: 20.6vh;
-    left: 26.55vw;
-    width: 100%;
-    font-family: ubuntu-reg;
-    font-size: 4vh;
-    color: black;
-}
-
-.td-style {
-
-}
 
 .guest-table  {
     padding: 3px;

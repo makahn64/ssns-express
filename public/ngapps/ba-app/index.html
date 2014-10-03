@@ -1,9 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="baApp" ng-controller="baAppController">
 <head>
-    <title></title>
+    <meta charset="utf-8">
+    <title>Genworth Brand Ambassador</title>
+    <!-- Not sure how many of these we need, grabbed them from YTLB -->
+    <link rel="stylesheet" href="css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="css/fonts.css" type="text/css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="css/app.css" type="text/css">
+    <link rel="stylesheet" href="css/transitions.css" type="text/css">
+
+    <!-- Third Party Javascript Includes -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../bower_components/angular-route/angular-route.min.js"></script>
+    <script src="../bower_components/angular-gestures/gestures.js"></script>
+    <!-- <script src="js/vendor/aniloader.js"></script> -->
+
+    <!-- App Includes -->
+    <script src="js/baNgApp.js"></script>
+    <script src="js/app-controller.js"></script>
+    <script src="js/page1Controller.js"></script>
+    <script src="js/page2Controller.js"></script>
+
+
 </head>
 <body>
-
+<img src="./img/Genworth_Financial_Logo_2013.jpg"/>
+<h1>{{ PageName }}</h1>
+<div ng-view></div>
 </body>
 </html>

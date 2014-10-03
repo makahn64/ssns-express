@@ -1,21 +1,7 @@
 //Define an angular module for our app
 var app = angular.module('ngApp', ["ngAnimate", "angular-gestures"]);
-var gui = require('nw.gui');
-var playlistsLoaded = false;
-var reloading = false;
-var appScope, playbackScope, modalScope, bsPlaybackScope;
 
-// Process is a global node.js object
-
-
-
-process.on('uncaughtException', function (err) {         
-    // restart app here
-    console.log(err);
-
-});
-
-
+/*
 $( document ).ready(function() {
 
     // start it up
@@ -23,7 +9,44 @@ $( document ).ready(function() {
 
 });
 
+*/
 
+app.directive('errSrc', function() {
+  return {
+    link: function(scope, element, attrs) {
+      element.bind('error', function() {
+        if (attrs.src != attrs.errSrc) {
+          attrs.$set('src', attrs.errSrc);
+          attrs.$set('style', "visibility: hidden");
+        }
+      });
+    }
+  }
+});
+
+
+app.filter('numberFixedLen', function () {
+        return function (n, len) {
+            var num = parseInt(n, 10);
+            len = parseInt(len, 10);
+            if (isNaN(num) || isNaN(len)) {
+                return n;
+            }
+            num = ''+num;
+            while (num.length < len) {
+                num = '0'+num;
+            }
+            return num;
+        };
+    });
+
+app.filter('firstInitial', function () {
+    return function (n) {
+
+        var rval = n.charAt(0).toUpperCase()+".";
+        return rval;
+    };
+});
 
 /*
 *

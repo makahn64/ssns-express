@@ -1,3 +1,9 @@
 <h1>{{ pageName }}</h1>
-<p>From the page 1 partial.</p>
-        <a href="#/page2">Go to muthafucking page 2</a>
+<label ng-repeat="a in answers">
+    <input
+            type="checkbox"
+            name="a"
+            value="{{a}}"
+            > {{a}}<br>
+</label>
+<a href="#/page2">Continue</a>

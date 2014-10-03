@@ -2,7 +2,7 @@
  * This is the Leaderboard controller for the app
  */
 
-app.controller("lbController", function($scope, $http, $interval, $timeout){
+app.controller("appControlController", function($scope, $http, $interval, $timeout){
 
     var SERVER_ROOT = "";
     // running on appdelegates.net, need to move root for ProxyPass in httpd.conf

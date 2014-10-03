@@ -5,15 +5,15 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-  <div id="ssbanner"><img src="images/ssbug96.png"/>ShareStation Server Console2</div>
+  <div id="ssbanner"><img src="images/client.png"/>Lexus Racing Game Control Console</div>
   <div id="main">
-    <h1>ShareStation Node Server is running.</h1>
-      <h2>Settings</h2>
-      <form action="/settings" enctype="multipart/form-data" method="post">
-          <div>EVENT NAME: {{eventName}} </div><br>
-          <div>EVENT ID: <input type="text" name="eventId" value="{{eventId}}"></div>
-          <input type="submit" value="Change">
-      </form>
+    <!--<p class="info">If you can read this, the Lexus server is running.</p>-->
+    <ul>
+	    <li><a href="registrants.html">Show registrants and signatures</a></li>
+        <li><a href="leaderboard-lx.html">Show leaderboard</a></li>
+	    <li><a href="lxguests.html">Detailed control panel</a></li>
+
+    </ul>
   </div>
 
   </body>

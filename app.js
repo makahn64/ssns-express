@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var ss = require('./routes/ssroutes');
+var guests = require('./routes/guests');
 
 // Added by Mitch
 var Datastore = require('nedb'), db = new Datastore({filename:"content/nedb/dbase.json", autoload: true});
@@ -21,7 +22,7 @@ app.set('view engine', 'hjs');
 
 //TODO Figure out why favicon is not working! Should get the ss icon, not the express icon.
 //favicon is supposed to change the little bug in browser tabs
-app.use(favicon(__dirname + '/public/images/ssicon.ico'));
+app.use(favicon(__dirname + '/public/images/clientico.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/ss', ss);
+app.use('/guests', guests);
 
 
 /// catch 404 and forwarding to error handler
