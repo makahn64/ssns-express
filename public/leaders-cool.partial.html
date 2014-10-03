@@ -1,0 +1,23 @@
+<div id="lb-container">
+<div id="lb-table-container">
+    <div ng-class="{ 'blackfont': $index==0}" class="lbcell" id="cell-{{$index}}" ng-repeat="guest in leaderboard | limitTo:10">
+        <!-- <span ng-class-even="'fromRight'" ng-class-odd="'fromLeft'" class="fl ra" ng-hide="isHidden($index)">{{$index+1 | numberFixedLen:3}}</span> -->
+        <span ng-class-even="'fromRight'" ng-class-odd="'fromLeft'" class="fromRight fc ra" ng-hide="isHidden($index)">{{guest.firstName | uppercase }} {{guest.lastName | firstInitial}}</span>
+        <span ng-class-even="'fromRight'" ng-class-odd="'fromLeft'" class="fromRight fr ra" ng-hide="isHidden($index)"> 00:{{guest.score | date : 'mm:ss' }} </span>
+    </div>
+</div>
+</div>
+
+        <!--
+
+
+
+<table class="lb-table">
+<tr ng-class="{ 'blackfont': $index==0}" class="repeat-animation" ng-repeat="guest in leaderboard">
+    <td>{{$index+1 | numberFixedLen:3}}</td>
+    <td>{{guest.firstName | uppercase }} {{guest.lastName | firstInitial}}</td>
+    <td>00:{{guest.score | date : 'mm:ss' }} </td>
+</tr> </table>
+
+
+        -->

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="ngApp" ng-controller="lbController">
+<head>
+    <title>Lexus Leaderboard</title>
+
+    <link rel="stylesheet" href="stylesheets/animate.css" type="text/css">
+    <link rel="stylesheet" href="stylesheets/ad-animation.css" type="text/css">
+
+    <link rel="stylesheet" href="stylesheets/leaderboard.css" type="text/css">
+
+
+    <!-- Third Party Javascript Includes -->
+    <script src="ngapps/bower_components/angular/angular.min.js"></script>
+    <script src="ngapps/bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="ngapps/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="ngapps/bower_components/angular-gestures/gestures.min.js"></script>
+    <script src="ngapps/bower_components/jquery/dist/jquery.min.js"></script>
+
+
+    <!-- App Includes -->
+    <script src="js/app.js"></script>
+    <!-- <script src="js/network-cache-factories.js"></script> -->
+    <script src="js/lbcontroller.js"></script>
+</head>
+<body>
+<!-- <ng-include src="state.nowShowing"></ng-include> -->
+<div ng-include="state.nowShowing" class="slide-animate"></div>
+</body>
+</html>
