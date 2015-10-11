@@ -1,0 +1,152 @@
+@font-face {
+    font-family: "droid";
+    src: url(../fonts/DroidSans.ttf);
+}
+
+@font-face {
+    font-family: "droid-bold";
+    src: url(../fonts/DroidSans-Bold.ttf);
+}
+
+@font-face {
+    font-family: "oxy-reg";
+    src: url(../fonts/Oxygen-Regular.ttf);
+}
+
+@font-face {
+    font-family: "ubuntu-reg";
+    src: url(../fonts/Ubuntu-Regular.ttf);
+}
+
+
+body {
+    margin: 0;
+    background-color: black;
+    color: #ffffff;
+    font-family: ubuntu-reg;
+    font-size: 4vh;
+}
+
+.lbcell {
+    margin-bottom: 3.9vh;
+    font-family: ubuntu-reg;
+    font-size: 4vh;
+    padding: 1vh;
+    color: white;
+    xxborder-bottom: thin dotted #444444;
+    opacity: 1;
+    height: 1.56vh;
+
+}
+
+
+.lb-header {
+    color: #ffffff;
+    font-size: 4vh;
+}
+
+.aafl {
+    float: left;
+    margin-left: 1vw;
+}
+
+.aafc {
+    margin-left: 5vw;
+}
+
+.fr {
+    float: right;
+}
+
+.fromRight {
+    zzcolor: #ffff00;
+}
+
+
+.blackfont {
+    color: black !important;
+
+}
+
+#topbanner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    background: url(../images/lx-lb-top.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 100%;
+    font-size: 2em;
+    height: 200px;
+    line-height: 100px;
+}
+
+#lb-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: orange;
+    background: url(../images/rcfrift_leaderboard_bgAll.png);
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    xxxxborder: 5px dashed red;
+}
+
+#lb-table-container {
+    position: absolute;
+    top: 10vh;
+    left: 10vw;
+    width: 56%;
+    border: 5px dashed yellow;
+
+}
+
+
+.guest-table  {
+    padding: 3px;
+
+}
+
+.guest-table tr:first-child td {
+    color: black;
+}
+
+
+.fromLeft.ng-hide-remove {
+    -webkit-animation: bounceInLeftStiff 750ms;
+    animation: bounceInLeftStiff 750ms;
+}
+
+.fromRight.ng-hide-remove {
+    -webkit-animation: bounceInRightStiff 2750ms;
+    animation: bounceInRightStiff 2750ms;
+}
+
+.qCellLeft.ng-hide-remove, .qCellRight.ng-hide-remove {
+    -webkit-animation: flipInX 1.0s;
+    animation: flipInX 1.0s;
+}
+
+
+/* does nothing in leaderboard */
+
+.ng-hide-add {
+    -webkit-animation: pulse 2.5s;
+    animation: pulse 2.5s;
+    display: block !important;
+}
+
+
+
+.slide-animate.ng-enter {
+    -webkit-animation: fadeIn 0.5s;
+    animation: fadeIn 0.5s;
+}
+
+
+.slide-animate.ng-leave {
+    -webkit-animation: fadeOut 0.15s;
+    animation: fadeOut 0.15s;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="ngApp" ng-controller="appControlController">
+<head>
+    <title>Nissan NV Challenege Leaderboard</title>
+    <link rel="shortcut icon" href="/images/clientico.ico?v=2" />
+
+    <link rel='stylesheet' href='stylesheets/style.css' />
+    <!-- Third Party Javascript Includes -->
+    <script src="ngapps/bower_components/angular/angular.min.js"></script>
+    <script src="ngapps/bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="ngapps/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="ngapps/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="ngapps/bower_components/angular-gestures/gestures.min.js"></script>
+    <script src="ngapps/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- App Includes -->
+    <script src="js/app.js"></script>
+    <script src="js/jakPoker.js"></script>
+    <script src="js/appcontrolcontroller.js"></script>
+
+</head>
+<body>
+<div id="topbanner"><img src="images/bannertop.png"/></div>
+<div class="greyheader">NV Challenge Control Panel</div>
+<div id="main">
+
+    <div class="leaderboard"><h1>Current Leaderboard</h1>
+        <table>
+
+
+        <tr ng-repeat="player in leaderboard">
+            <td>{{$index+1}}</td>
+            <td>{{player.name.firstName}}</td>
+            <td>{{player.name.lastName}}</td>
+            <td>{{player.score}}</td>
+            <td>{{player.description}}</td>
+            <td ng-repeat="card in player.hand">{{card}}</td>
+            <td><button ng-click="clearPlayer(player._id)">Remove Player</button> </td>
+
+        </tr>
+
+        </table>
+
+    </div>
+    <div class="buttonholder">
+        <button class="button" ng-click="generateRandomPlayers()">Generate Random Players</button>
+        <button class="button" ng-click="clearLB()">{{clearLBButtonText}}</button>
+    </div>
+</div>
+
+</body>
+</html>

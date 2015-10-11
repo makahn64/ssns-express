@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="ngApp" ng-controller="topController">
+<head>
+    <title>Nissan NV Challenge: Game Screen</title>
+    <link rel="shortcut icon" href="/images/clientico.ico?v=2" />
+
+    <link rel="stylesheet" href="stylesheets/animate.css" type="text/css">
+    <link rel="stylesheet" href="stylesheets/ad-animation.css" type="text/css">
+    <link rel="stylesheet" href="stylesheets/pokertable.css" type="text/css">
+    <link rel="stylesheet" href="stylesheets/leaderboard.css" type="text/css">
+
+
+    <!-- Third Party Javascript Includes -->
+    <script src="ngapps/bower_components/angular/angular.min.js"></script>
+    <script src="ngapps/bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="ngapps/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="ngapps/bower_components/angular-gestures/gestures.min.js"></script>
+    <script src="ngapps/bower_components/jquery/dist/jquery.min.js"></script>
+
+
+    <!-- App Includes -->
+    <script src="js/jakPoker.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/topController.js"></script>
+    <script src="js/gameController.js"></script>
+    <script src="js/lbController.js"></script>
+
+
+</head>
+<body>
+
+<!--
+<div id="banner_top">
+    <img id="logo_left" src="images/nissan-cv-rough.png">
+    <img id="logo_right" ng-click="logoClicked()" src="images/nissanlogo-150x120.png">
+</div>
+
+-->
+
+<img id="background" ng-src="{{currentBackground}}">
+
+<!--    POPUP MENU CONTAINER    -->
+<ng-include src="popupWindow"></ng-include>
+<!--	MAIN SCREEN CONTAINER   -->
+<ng-include src="mainWindow"></ng-include>
+
+<!--
+onload="initMainScreen()"
+-->
+
+</body>
+</html>

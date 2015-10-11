@@ -1,0 +1,115 @@
+body {
+    margin:0;
+    background-color: magenta;
+}
+
+a {
+    color: #89ae4a   ;
+}
+
+h1 {
+    color: #419aba;
+    position: absolute;
+    top: 50vh;
+    left:2vw;
+}
+
+.dbbox {
+    border: 3px dotted blue;
+}
+
+#magnet1 {
+    position: absolute;
+    top: 50vh;
+    left: 20vh;
+    /* Safari */
+    -webkit-transform: rotate(-86deg);
+
+    /* Firefox */
+    -moz-transform: rotate(-90deg);
+
+    /* IE */
+    -ms-transform: rotate(-90deg);
+
+    /* Opera */
+    -o-transform: rotate(-90deg);
+
+}
+
+#outermost {
+    background-color: lightpink;
+    width: 100%;
+    height: 100vh;
+    background: url(../images/rcfrift_leaderboard_bgAll.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.topspacer {
+    width: 100%;
+    height: 20%;
+    border: 2px dashed red;
+
+}
+
+.listholder {
+    width: 50%;
+    height: 75%;
+    border: 2px dashed blue;
+    margin-left: 25%;
+}
+
+.cellLeft {
+    font-size: 4vh;
+    color: white;
+    font-family: Helvetica Neue, Helvetica, Arial;
+    margin-bottom: 2.71vh;
+}
+
+.black {
+    color: #000000;
+}
+
+.fr {
+    float: right;
+}
+
+.inline {
+    display: inline;
+}
+
+.auto-auto {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.p50pct {
+    background-color: lightgreen;
+    width: 50%;
+    height: 17%;
+
+}
+
+.rotate {
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin:    0 0;
+    -ms-transform-origin:     0 0;
+    -o-transform-origin:      0 0;
+
+
+    /* Safari */
+    -webkit-transform: rotate(-90deg);
+
+    /* Firefox */
+    -moz-transform: rotate(-90deg);
+
+    /* IE */
+    -ms-transform: rotate(-90deg);
+
+    /* Opera */
+    -o-transform: rotate(-90deg);
+
+    /* Internet Explorer */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+}

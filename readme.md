@@ -1,6 +1,20 @@
 ShareStation Node Server (SSNS)
 -------------------------------
 
+MK Notes from 9-2015
+====================
+
+Holy shit is this some old school crap right here!
+
+To run the app:  `node www/bin`
+
+To see the app: `localhost:8003`. Why 8003? WTF knows? I cannot remember that far back. 
+Don't even know where the port is set, don't really give a shit either.
+
+
+Original Notes
+-------------
+
 The application uses Node.JS with the Express framework. It's a stock Express install
 (see the Express docs for install method), but the Hogan templating engine is used
 instead of the default. Hogan was chosen because it uses essentially straight HTML

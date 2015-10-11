@@ -1,0 +1,178 @@
+@font-face {
+    font-family: "nissan-reg";
+    src: url(./NissanProReg.otf);
+}
+
+@font-face {
+    font-family: "nissan-light";
+    src: url(./NissanProLight.otf);
+}
+
+@font-face {
+    font-family: "nissan-med";
+    src: url(./NissanProMedium.otf);
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow: hidden;
+    aaacursor: none;
+
+}
+
+#background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+
+table {
+    position: absolute;
+    border-collapse:collapse;
+    top: 21.9vh;
+    border: 2px solid blue;
+}
+
+tr {
+    height: 15.7vh;
+    aaaborder: 1px solid crimson;
+}
+
+td {
+
+    aaborder: 2px solid orangered;
+
+}
+
+#clear-button {
+    position: absolute;
+    top: 0vh;
+    right: 0vw;
+    aaaborder: 2px solid blue;
+    height: 10vh;
+    width: 12vh;
+}
+
+.lb_table {
+    width: 100vw;
+    aabackground-color: orange;
+}
+
+.td_place {
+    width: 7vw;
+
+}
+
+.td_name {
+    width: 18vw;
+    padding-left: 2vw;
+}
+
+.td_cards {
+    width: 18vw;
+    padding-left: 2vw;
+}
+
+.card {
+    width: 3vw;
+    height: 9vh;
+    margin-right: 5px;
+}
+
+.player_name {
+    font-family: nissan-med;
+    font-size: 3vh;
+    color: #4e4e4e;
+}
+
+.player_hand {
+    font-family: nissan-light;
+    font-size: 2.2vh;
+    color: #c61633;
+}
+
+/* CARD ANIMATIONS */
+
+.card.ng-hide-remove {
+    -webkit-animation: flipInY 0.75s;
+    animation: flipInY 0.75s;
+}
+
+/* no outtro for card, the card holder does that */
+
+/*
+.card.ng-hide-add {
+    -webkit-animation: fadeOut 0.5s;
+    animation: fadeOut 0.5s;
+}
+*/
+/* PLAYER NAME ANIMATIONS */
+
+.player_name.ng-hide-remove {
+    -webkit-animation: fadeIn 1.35s;
+    animation: fadeIn 1.35s;
+}
+
+
+.player_name.ng-hide-add {
+    -webkit-animation: fadeOut 0.15s;
+    animation: fadeOut 0.15s;
+    display: block !important;
+}
+
+/* HAND DESCRIPTION ANIMATION */
+
+.player_hand.ng-hide-remove {
+    -webkit-animation: fadeIn 1.75s;
+    animation: fadeIn 1.75s;
+}
+
+
+.player_hand.ng-hide-add {
+    -webkit-animation: fadeOut 0.5s;
+    animation: fadeOut 0.5s;
+    display: block !important;
+}
+
+/* CARD HOLDER ANIMATION */
+
+.card_holder.ng-hide-remove {
+    -webkit-animation: fadeIn 0.5s;
+    animation: fadeIn 0.5s;
+}
+
+
+.card_holder.ng-hide-add {
+    -webkit-animation: fadeOut 0.5s;
+    animation: fadeOut 0.5s;
+    display: block !important;
+}
+
+.fromRight.ng-hide-remove {
+    -webkit-animation: bounceInLeftStiff 750ms;
+    animation: bounceInLeftStiff 750ms;
+}
+
+.fromRight.ng-hide-remove {
+    -webkit-animation: bounceInRightStiff 2750ms;
+    animation: bounceInRightStiff 2750ms;
+}
+
+.qCellLeft.ng-hide-remove, .qCellRight.ng-hide-remove {
+    -webkit-animation: flipInX 1.0s;
+    animation: flipInX 1.0s;
+}
+
+/* CLoaking directive to prevent template from being flashed before compile */
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}

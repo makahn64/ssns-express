@@ -1,0 +1,43 @@
+<!-- <div class="grey_banner">
+    <img class="nvlogo" src="images/nvchallenge.png">
+    <span class="clb">CURRENT LEADERBOARD</span>
+</div>
+-->
+
+
+<div id="lb_container" ng-controller="lbController">
+
+<img id="clear-button-lb" src="images/clearbutton.png" ng-click="logoClicked()">
+<table class="lb_table">
+<tr ng-repeat="player in leaderboard | limitTo: 5">
+    <td class="td_place_left" ng-click="animOut()"></td>
+
+    <td class="td_cards_left">
+        <div ng-show="showHandDescr[$index]" class="card_holder">
+        <img ng-show="showCard[$parent.$index][$index]" class="card" ng-repeat="card in leaderboard[$index].hand" ng-src="images/Cards_Small/Cards_Small_{{card|lowercase}}.png">
+        </div>
+    </td>
+    <td class="td_name_left">
+        <div ng-show="showHandDescr[$index]" class="player_hand_left">{{leaderboard[$index].description}}</div>
+        <div ng-show="showName[$index]" class="player_name_left">{{leaderboard[$index].name.firstName}} {{leaderboard[$index].name.lastName}}</div>
+    </td>
+    <!-- Second column -->
+    <td class="td_place_right"></td>
+    <td class="td_name_right">
+        <div ng-show="showHandDescr[$index+5]" class="player_hand">{{leaderboard[$index+5].description}}</div>
+        <div ng-show="showName[$index+5]" class="player_name">{{leaderboard[$index+5].name.firstName}} {{leaderboard[$index+5].name.lastName}}</div>
+    </td>
+    <td class="td_cards_right">
+       <div ng-show="showHandDescr[$index+5]" class="card_holder">
+           <img ng-show="showCard[$parent.$index+5][$index]" class="card" ng-repeat="card in leaderboard[$index+5].hand" ng-src="images/Cards_Small/Cards_Small_{{card|lowercase}}.png">
+        </div>
+    </td>
+
+</tr>
+
+
+
+
+</table>
+
+	</div>

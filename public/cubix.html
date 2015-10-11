@@ -1,0 +1,62 @@
+<html>
+<head>
+    <title>My first Three.js app</title>
+    <style>canvas { width: 100%; height: 100% } body{margin:0px}</style>
+</head>
+<body>
+<script src="ngapps/bower_components/three.js/three.min.js"></script>
+<script>
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    var geometry = new THREE.BoxGeometry(.001, 1.3, 1);
+    //var material = new THREE.MeshBasicMaterial({color: 0x00ff00, wireframe: true})
+
+    var material1 = new THREE.MeshPhongMaterial( { map: THREE.ImageUtils.loadTexture('images/Cards_Big/Cards_Big_Back.png') } );
+    var material2 = new THREE.MeshPhongMaterial( { map: THREE.ImageUtils.loadTexture('images/Cards_Big/Cards_Big_9h.png') } );
+    var material3 = new THREE.MeshPhongMaterial( { ambient: 0x050505, color: 0x0033ff, specular: 0x555555, shininess: 30 } );
+    var material4 = new THREE.MeshPhongMaterial(  { ambient: 0x050505, color: 0x0033ff, specular: 0x555555, shininess: 30 } );
+    var material5 = new THREE.MeshPhongMaterial(  { ambient: 0x050505, color: 0x0033ff, specular: 0x555555, shininess: 30 } );
+    var material6 = new THREE.MeshPhongMaterial(  { ambient: 0x050505, color: 0x0033ff, specular: 0x555555, shininess: 30 });
+
+    var materials = [material1, material2, material3, material4, material5, material6];
+
+    var meshFaceMaterial = new THREE.MeshFaceMaterial( materials );
+    cube = new THREE.Mesh(geometry,  meshFaceMaterial);
+
+    scene.add(cube);
+
+
+    camera.position.z = 2;
+
+    var pointLight =
+            new THREE.PointLight(0xFFFFFF);
+
+    // set its position
+    pointLight.position.x = 10;
+    pointLight.position.y = 50;
+    pointLight.position.z = 130;
+
+    // add to the scene
+    scene.add(pointLight);
+
+    var render = function () {
+        requestAnimationFrame(render);
+
+        //cube.rotation.x += 0.01;
+        cube.rotation.y +=0.05;
+        //cube2.rotation.x -= 0.01;
+        //cube2.rotation.y -= 0.01;
+        //camera.position.z -= 0.005;
+
+        renderer.render(scene, camera);
+    };
+
+    render();
+</script>
+</body>
+</html>

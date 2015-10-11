@@ -1,13 +1,30 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding: 0px;
+    margin: 0px;
 }
 
 a {
-  color: #00B7FF;
+  color: #a7001c;
 }
 
 h1 {
-    color: blueviolet;
+    color: #419aba;
+    margin-left: 5px;
+}
+
+table {
+    margin-left: 5px;
+}
+
+.greyheader {
+    background-color: #4e4e4e;
+    color: #ffffff;
+    width: 100%;
+    font-size: 2.0em;
+    padding-left: 4vw;
+    padding-top: 1.5vw;
+    padding-bottom: 1.5vw;
 }
 
 #ssbanner {
@@ -15,22 +32,87 @@ h1 {
     top: 0;
     left: 0;
     background-color: white;
-    width: 100%;
-    font-size: 2em;
-    height: 100px;
-    line-height: 100px;
+    width: 100vw;
+
 }
 
-#ssbanner img {
+
+.info {
+    font-size: 0.8em;
+    background-color: lightcyan;
+    padding: 10px;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: darkcyan;
+    width: 960px;
+}
+
+.guest-table, tr, td {
+    padding: 3px;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: darkcyan;
+}
+
+
+.guest-name {
+    width: 140px;
+}
+
+.button-cell {
+    width: 80px;
+}
+
+.waitlisted {
+    background-color: red;
+}
+
+.whos-up {
+    padding: 10px;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: darkcyan;
+    width: 400px;
+    font-size: 1.3em;
+
+
+}
+
+.buttonholder {
+    margin: 5px;
+}
+
+.button {
+    border-top: 1px solid #f70000;
+    background: #de0306;
+    background: -webkit-gradient(linear, left top, left bottom, from(#a83737), to(#de0306));
+    background: -webkit-linear-gradient(top, #a83737, #de0306);
+    background: -moz-linear-gradient(top, #a83737, #de0306);
+    background: -ms-linear-gradient(top, #a83737, #de0306);
+    background: -o-linear-gradient(top, #a83737, #de0306);
+    padding: 9px 18px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+    box-shadow: rgba(0,0,0,1) 0 1px 0;
+    text-shadow: rgba(0,0,0,.4) 0 1px 0;
+    color: white;
+    font-size: 13px;
+    font-family: Helvetica, Arial, Sans-Serif;
+    text-decoration: none;
     vertical-align: middle;
-    margin-right: 20px;
-
 }
-
-
-
-#main {
-    position: absolute;
-    top: 100px;
-    left: 10px;
+.button:hover {
+    border-top-color: #ff0000;
+    background: #ff0000;
+    color: #ccc;
+}
+.button:active {
+    border-top-color: #5c1b1b;
+    background: #5c1b1b;
 }
