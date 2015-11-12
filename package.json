@@ -6,15 +6,18 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "express": "~4.0.0",
-    "static-favicon": "~1.0.0",
-    "morgan": "~1.0.0",
-    "cookie-parser": "~1.0.1",
+    "angularjs": "*",
     "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.1",
     "debug": "~0.7.4",
-    "hjs": "~0.0.6",
+    "express": "~4.0.0",
     "formidable": "*",
-    "nedb":"*",
-      "angularjs":"*"
+    "fs-extra": "^0.24.0",
+    "hjs": "~0.0.6",
+    "lodash": "^3.10.1",
+    "morgan": "~1.0.0",
+    "multer": "^1.0.6",
+    "nedb": "*",
+    "static-favicon": "~1.0.0"
   }
 }

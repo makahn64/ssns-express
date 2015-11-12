@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="ngApp" ng-controller="videoController">
+<head>
+  <title>Nissan NV Challenege Leaderboard</title>
+  <link rel="shortcut icon" href="/images/clientico.ico?v=2"/>
+
+  <link rel='stylesheet' href='stylesheets/style.css'/>
+  <link rel="stylesheet" href="stylesheets/bootslate.css"/>
+  <!-- Third Party Javascript Includes -->
+  <script src="ngapps/bower_components/angular/angular.min.js"></script>
+  <script src="ngapps/bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="ngapps/bower_components/angular-route/angular-route.min.js"></script>
+  <script src="ngapps/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+  <script src="ngapps/bower_components/angular-gestures/gestures.min.js"></script>
+  <script src="ngapps/bower_components/jquery/dist/jquery.min.js"></script>
+
+  <!-- App Includes -->
+  <script src="js/app.js"></script>
+  <script src="js/videocontroller.js"></script>
+
+</head>
+<body>
+<div class="topbanner">
+  <img src="images/bannertop.png"/>
+</div>
+<div class="greyheader">NV Challenge Change Video</div>
+<div class="container-fluid" style="margin-top: 20px;">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+      <h3>Current Video</h3>
+      <video src="/vids/attract.mp4" style="max-width: 200px; margin-top: 20px;" controls></video>
+       <h3 style="margin-bottom: 20px;">Add New Video</h3>
+      <div class="dropzone" drag-and-drop>Drop New Video Here</div>
+    </div>
+    <div class="col-md-8">
+      <h3 style="margin-bottom: 20px;">Available Videos</h3>
+      <p style="color:#ff6f72;"><i><b>YOU MUST</b> restart or refresh the leaderboard browser after changing the video!!!</i></p>
+      <h4 ng-repeat="v in videos">
+        <button class="btn btn-sm btn-success" ng-click="select(v)">SELECT</button>&nbsp;&nbsp;{{v}}</h4>
+
+    </div>
+
+  </div>
+</div>
+
+
+</body>
+</html>

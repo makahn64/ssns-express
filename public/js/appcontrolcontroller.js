@@ -11,6 +11,8 @@ app.controller("appControlController", function($scope, $http, $interval, $timeo
 
     var clearArmed = false;
 
+    $scope.hideGenerateButton = true;
+
     $scope.hideSim = true;
 
     $scope.clearLBButtonText = "Clear Leaderboard (Must Tap Twice)";

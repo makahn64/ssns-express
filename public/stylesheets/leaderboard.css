@@ -27,17 +27,12 @@ body {
     padding: 0px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
-    -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     overflow: hidden;
-    aaacursor: none;
-    aaperspective: 400px;
-    aa-webkit-perspective: 400px;
+
 }
-
-
 
 #background {
     position: absolute;
@@ -45,22 +40,21 @@ body {
     width: 100%;
 }
 
-
 table {
     position: absolute;
-    border-collapse:collapse;
+    border-collapse: collapse;
     top: 23.25vh;
-    aaborder: 2px solid blue;
+    border: 2px solid blue;
 }
 
 tr {
     height: 13.85vh;
-    aaborder: 1px solid crimson;
+    border: 1px solid crimson;
 }
 
 td {
 
-    aaborder: 2px solid orangered;
+    border: 2px solid orangered;
 
 }
 
@@ -84,14 +78,8 @@ td {
 
 .lb_table {
     width: 100vw;
-    aabackground-color: orange;
-    aa-webkit-transform: rotateY(10deg); /* Safari */
-    aatransform: rotateY(10deg); /* Standard syntax */
-    aa-webkit-transform: rotateX(10deg); /* Safari */
-    aatransform: rotateX(10deg); /* Standard syntax */
+
 }
-
-
 
 .td_place_left {
     width: 3.5vw;
@@ -132,7 +120,9 @@ td {
 .card {
     width: 2.5vw;
     height: 7.5vh;
+    /* was 5px */
     margin-right: 5px;
+    float: left;
 }
 
 .player_name {
@@ -149,7 +139,6 @@ td {
     color: #c61633;
     text-align: right;
     margin-bottom: -1vh;
-
 
 }
 
@@ -189,7 +178,6 @@ td {
     animation: fadeIn 1.35s;
 }
 
-
 .player_name.ng-hide-add {
     -webkit-animation: fadeOut 0.15s;
     animation: fadeOut 0.15s;
@@ -203,7 +191,6 @@ td {
     animation: fadeIn 1.75s;
 }
 
-
 .player_hand_left.ng-hide-add {
     -webkit-animation: fadeOut 0.5s;
     animation: fadeOut 0.5s;
@@ -213,8 +200,8 @@ td {
 .player_hand_left.ng-hide-remove {
     -webkit-animation: fadeIn 1.75s;
     animation: fadeIn 1.75s;
-}
 
+}
 
 .player_hand.ng-hide-add {
     -webkit-animation: fadeOut 0.5s;
@@ -228,7 +215,6 @@ td {
     -webkit-animation: fadeIn 0.5s;
     animation: fadeIn 0.5s;
 }
-
 
 .card_holder.ng-hide-add {
     -webkit-animation: fadeOut 0.5s;
@@ -256,3 +242,34 @@ td {
 [ng\:cloak], [ng-cloak], .ng-cloak {
     display: none !important;
 }
+
+.vidholder {
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transition: all 2.5s ease;
+    -webkit-transition: all 2.5s ease;
+    opacity: 1;
+}
+
+#vid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.ng-hide-add, .ng-hide-remove {
+    /* ensure visibility during the transition */
+    display: block !important; /* yes, important */
+}
+
+.vidholder.ng-hide {
+
+    opacity: 0;
+}
+

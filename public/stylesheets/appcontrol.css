@@ -68,19 +68,7 @@ body {
 
 }
 
-#topbanner {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: black;
-    background: url(../images/lx-lb-top.jpg);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    width: 100%;
-    font-size: 2em;
-    height: 200px;
-    line-height: 100px;
-}
+
 
 #lb-container {
     position: absolute;
