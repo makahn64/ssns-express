@@ -98,6 +98,20 @@ app.controller( "lbController", function ( $scope, $timeout, $log, lbService, $s
 
     }
 
+    // About 24 is where it breaks
+    $scope.nameFor = function(idx){
+
+        var fullName = $scope.leaderboard[ idx ].name.firstName + " " +
+            $scope.leaderboard[ idx ].name.lastName;
+
+        if (fullName.length > 23 ){
+            fullName = fullName.slice(0, 19);
+            fullName = fullName + '...';
+        }
+
+        return fullName;
+    }
+
     // 10 or less entries
     $scope.leaderboard = [];
 

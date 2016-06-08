@@ -77,8 +77,8 @@ app.controller("gameController", function($scope, $state, lbService, $interval, 
                 secondCard: "",
                 isHighlighted: false,
                 isMucked: false,
-                name: $scope.leaderboard[i].name.firstName+" "+
-                    $scope.leaderboard[i].name.lastName,
+                name: limitedName($scope.leaderboard[i].name.firstName+" "+
+                    $scope.leaderboard[i].name.lastName),
                 showFirstCard: false,
                 showSecondCard: false,
                 showNamePlaque: true
@@ -400,6 +400,17 @@ app.controller("gameController", function($scope, $state, lbService, $interval, 
 
     $scope.justExit = function(){
         $state.go('lb');
+    }
+
+    // About 24 is where it breaks
+    function limitedName( fullName ) {
+
+        if ( fullName.length > 23 ) {
+            fullName = fullName.slice( 0, 19 );
+            fullName = fullName + '...';
+        }
+
+        return fullName;
     }
 
     $scope.refreshLB();
