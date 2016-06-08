@@ -11,7 +11,7 @@ app.controller( "videoController", function ( $scope, $http, $interval, $timeout
     $scope.vid.elem.addEventListener( "ended", function () {
         $log.info( ':::::::::> VIDEO ENDED <::::::::::' );
         $scope.vid.show = false;
-        //checkLBForChanges();
+        $scope.die();
     } );
 
    
@@ -22,7 +22,6 @@ app.controller( "videoController", function ( $scope, $http, $interval, $timeout
             $scope.vid.elem.volume      = 0;
             $scope.vid.elem.pause();
             $scope.vid.elem.currentTime = 0; //rewind
-            $state.go('lb');
         } else {
             $timeout( muteAudio, 100 );
         }
@@ -35,6 +34,9 @@ app.controller( "videoController", function ( $scope, $http, $interval, $timeout
         $log.info( "videoController: Video tapped or lb change. Either way, term vid." );
         $scope.vid.show = false;
         muteAudio(); // shutdown video
+        $timeout( function(){
+            $state.go( 'lb' );
+        }, 500);
 
     }
 

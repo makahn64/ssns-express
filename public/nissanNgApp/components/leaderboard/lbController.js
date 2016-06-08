@@ -2,11 +2,12 @@
  * This is the Leaderboard controller for the app
  */
 
-app.controller( "lbController", function ( $scope, $timeout, $log, lbService, $state ) {
+app.controller( "lbController", function ( $scope, $timeout, $log, lbService, $state, toastr ) {
 
 
     var SHOW_VIDEO_AFTER_SECONDS = 5*60; // 5 minutes
     var _goToVideoNow = false;
+    var vidLooper; //promise
 
     //var BUILD_SPEED = "oncrack";
     var BUILD_SPEED = "normal";
@@ -150,12 +151,24 @@ app.controller( "lbController", function ( $scope, $timeout, $log, lbService, $s
     }
 
     $scope.logoClicked = function(){
-        $state.go("ft");
+
+        if ($scope.leaderboard.length > 1){
+            $state.go( "ft" );
+        }
+        else {
+            toastr.error( 'You need at least 2 players to play the final hand.', 'Error' );
+        }
     }
 
-    $timeout( function(){
+    vidLooper = $timeout( function(){
         _goToVideoNow = true;
     }, SHOW_VIDEO_AFTER_SECONDS*1000);
+
+    $scope.$on( "$destroy", function () {
+        if ( vidLooper ) {
+            $timeout.cancel( vidLooper );
+        }
+    } );
 
     checkLBForChanges();
 
