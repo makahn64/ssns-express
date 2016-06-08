@@ -1,0 +1,293 @@
+/* INCLUDES PIXEL-WHORE FIXES FOR NEW FINAL, FINAL, really we mean it FINAL LEADERBOARD */
+
+@font-face {
+    font-family: "nissan-reg";
+    src: url(/stylesheets/NissanProReg.otf);
+}
+
+@font-face {
+    font-family: "nissan-light";
+    src: url(/stylesheets/NissanProLight.otf);
+}
+
+@font-face {
+    font-family: "nissan-med";
+    src: url(/stylesheets/NissanProMedium.otf);
+}
+
+@font-face {
+    font-family: "brush-pixel-whore";
+    src: url(/stylesheets/1336.ttf);
+}
+
+/* Change aaacursor to cursor for deployment. Hides the cursor on a touch screen. */
+
+body {
+    margin: 0px;
+    padding: 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow: hidden;
+    background: black;
+
+}
+
+#background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.lb_background {
+    background: url(/images/Leaderboard.png);
+    background-size: cover;
+    aabackground: #ffff00;
+    aaborder: 1px solid pink;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+table {
+    position: absolute;
+    border-collapse: collapse;
+    top: 23.25vh;
+    aaborder: 2px solid blue;
+}
+
+tr {
+    height: 13.85vh;
+    aaborder: 1px solid #ffc5d1;
+}
+
+td {
+
+    aaborder: 2px solid orangered;
+
+}
+
+#clear-button-lb {
+    position: absolute;
+    top: 5vh;
+    left: 40vw;
+    aaaborder: 2px solid blue;
+    height: 20vh;
+    width: 30vh;
+}
+
+#clear-button-ft {
+    position: absolute;
+    top: 0vh;
+    right: 0vw;
+    aaaborder: 2px solid blue;
+    height: 10vh;
+    width: 15vh;
+}
+
+.lb_table {
+    width: 100vw;
+
+}
+
+.td_place_left {
+    width: 3.5vw;
+    aaborder: 2px solid deeppink;
+
+}
+
+.td_place_right {
+    width: 3.0vw;
+    aaborder: 2px solid greenyellow;
+
+}
+
+.td_name_right {
+    width: 13vw;
+    padding-right: 2vw;
+    aaborder: 2px solid purple;
+
+}
+
+.td_name_left {
+    width: 13vw;
+    padding-right: 2vw;
+    aaborder: 2px solid purple;
+}
+
+.td_cards_left {
+    width: 9.5vw;
+    padding-left: 2.5vw;
+}
+
+.td_cards_right {
+    width: 12.5vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+.card {
+    width: 2.5vw;
+    height: 7.5vh;
+    /* was 5px */
+    margin-right: 5px;
+    float: left;
+}
+
+.player_name {
+    font-family: nissan-light;
+    font-size: 4.0vh;
+    color: #4e4e4e;
+    text-align: right;
+
+}
+
+.player_hand {
+    font-family: brush-pixel-whore;
+    font-size: 4.2vh;
+    color: #c61633;
+    text-align: right;
+    margin-bottom: -1vh;
+
+}
+
+.player_name_left {
+    font-family: nissan-light;
+    font-size: 3.5vh;
+    color: #4e4e4e;
+}
+
+.player_hand_left {
+    font-family: brush-pixel-whore;
+    font-size: 3.5vh;
+    color: #c61633;
+    margin-bottom: -1vh;
+
+}
+
+.pname {
+    border: 1px solid pink;
+    width: 600px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* CARD ANIMATIONS */
+
+/*.card.ng-hide-remove {*/
+    /*-webkit-animation: flipInY 5.75s;*/
+    /*animation: flipInY 5.75s;*/
+/*}*/
+
+/* no outtro for card, the card holder does that */
+
+/*
+.card.ng-hide-add {
+    -webkit-animation: fadeOut 0.5s;
+    animation: fadeOut 0.5s;
+}
+*/
+/* PLAYER NAME ANIMATIONS */
+
+.player_name.ng-hide-remove {
+    -webkit-animation: fadeIn 1.35s;
+    animation: fadeIn 1.35s;
+}
+
+/*.player_name.ng-hide-add {*/
+    /*-webkit-animation: fadeOut 0.15s;*/
+    /*animation: fadeOut 0.15s;*/
+    /*display: block !important;*/
+/*}*/
+
+/* HAND DESCRIPTION ANIMATION */
+
+.player_hand.ng-hide-remove {
+    -webkit-animation: fadeIn 1.75s;
+    animation: fadeIn 1.75s;
+}
+
+/*.player_hand_left.ng-hide-add {*/
+    /*-webkit-animation: fadeOut 0.5s;*/
+    /*animation: fadeOut 0.5s;*/
+    /*display: block !important;*/
+/*}*/
+
+.player_hand_left.ng-hide-remove {
+    -webkit-animation: fadeIn 1.75s;
+    animation: fadeIn 1.75s;
+
+}
+
+/*.player_hand.ng-hide-add {*/
+    /*-webkit-animation: fadeOut 0.5s;*/
+    /*animation: fadeOut 0.5s;*/
+    /*display: block !important;*/
+/*}*/
+
+/* CARD HOLDER ANIMATION */
+
+.card_holder.ng-hide-remove {
+    -webkit-animation: fadeIn 0.5s;
+    animation: fadeIn 0.5s;
+}
+
+/*.card_holder.ng-hide-add {*/
+    /*-webkit-animation: fadeOut 0.5s;*/
+    /*animation: fadeOut 0.5s;*/
+    /*display: block !important;*/
+/*}*/
+
+.fromRight.ng-hide-remove {
+    -webkit-animation: bounceInLeftStiff 750ms;
+    animation: bounceInLeftStiff 750ms;
+}
+
+.fromRight.ng-hide-remove {
+    -webkit-animation: bounceInRightStiff 2750ms;
+    animation: bounceInRightStiff 2750ms;
+}
+
+.qCellLeft.ng-hide-remove, .qCellRight.ng-hide-remove {
+    -webkit-animation: flipInX 1.0s;
+    animation: flipInX 1.0s;
+}
+
+/* CLoaking directive to prevent template from being flashed before compile */
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}
+
+.vidholder {
+    background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transition: all 2.5s ease;
+    -webkit-transition: all 2.5s ease;
+    opacity: 1;
+}
+
+#vid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.ng-hide-add, .ng-hide-remove {
+    /* ensure visibility during the transition */
+    display: block !important; /* yes, important */
+}
+
+.vidholder.ng-hide {
+
+    opacity: 0;
+}
+

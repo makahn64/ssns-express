@@ -1,0 +1,371 @@
+#overlay {
+    position: absolute;
+    aaabackground-color: black;
+    background: url(/images/winneroverlay.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    aaaopacity: 0.7;
+    width: 100%;
+    height: 95vh;
+    top: 9vh;
+    left: 0vw;
+    z-index: 10;
+    aaaborder: 2px blue solid;
+    font-family: nissan-med;
+}
+
+#chipoverlay {
+    position: absolute;
+    nnbackground: url(/images/FinalHand_chips_fullscreen.png);
+    nnbackground-size: 100%;
+    nnbackground-repeat: no-repeat;
+    aaaopacity: 0.7;
+    width: 100%;
+    height: 100%;
+    top: 0vh;
+    left: 0vw;
+    aaaborder: 2px blue solid;
+}
+
+#chipoverlay img {
+    width: 100%;
+    height: 100%;
+}
+
+#outrooverlay {
+    position: absolute;
+    aaabackground-color: black;
+    background: url(/images/winneroverlay.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    aaaopacity: 0.7;
+    width: 100%;
+    height: 95vh;
+    top: 9vh;
+    left: 0vw;
+    z-index: 10;
+    aaaborder: 2px blue solid;
+    font-family: nissan-med;
+}
+
+#winnername {
+    position: absolute;
+    top: 23vh;
+    width: 100%;
+    text-align: center;
+    font-size: 10vh;
+    color: white;
+}
+
+.douwant {
+      position: absolute;
+      top: 24vh;
+      width: 70%;
+    left: 15vw;
+      text-align: center;
+      font-size: 10vh;
+      color: white;
+  }
+
+
+#isthewinner, .answer {
+    position: absolute;
+    top: 54vh;
+    width: 100%;
+    text-align: center;
+    font-size: 10vh;
+    color: white;
+    aaaborder: 2px blue solid;
+}
+
+
+
+.poker_card {
+    position: absolute;
+    height: 17.5vh;
+    width: 7.5vw;
+}
+
+.hole_card {
+    position: absolute;
+    height: 7.5vh;
+    width: 7.5vw;
+}
+
+.name {
+    position: absolute;
+}
+
+.firstrow {
+    top: 13vh;
+}
+
+.secondrow {
+    top: 30vh;
+
+}
+
+.thirdrow {
+    top: 63vh;
+
+}
+
+.fourthrow {
+    top: 84vh;
+
+}
+
+.frplaque {
+    top: 20vh;
+}
+
+.srplaque {
+    top: 37vh;
+}
+
+.trplaque {
+    top: 70vh;
+}
+
+.fthrplaque {
+    top: 91vh;
+}
+
+.frontcard {
+    aabox-shadow: -1px 0px 2px #303030;
+}
+
+#seat1, #seat8 {
+    left: 26vw;
+}
+
+#seat1a, #seat8a {
+    left: 29vw;
+}
+
+#name1, #name8 {
+    left: 25.2vw;
+}
+
+#seat2, #seat7 {
+    left: 45vw;
+}
+
+#seat2a, #seat7a {
+    left: 48vw;
+}
+
+#name2, #name7 {
+    left: 44.2vw;
+}
+
+#seat3, #seat6 {
+    left: 64vw;
+}
+
+#seat3a, #seat6a {
+    left: 67vw;
+}
+
+#name3, #name6 {
+    left: 63.2vw;
+}
+
+#seat4, #seat5{
+    left: 84vw;
+}
+
+#seat4a, #seat5a {
+    left: 87vw;
+}
+
+#name4, #name5 {
+    left: 83.2vw;
+}
+
+#seat9, #seat10{
+    left: 6vw;
+}
+
+#seat9a, #seat10a {
+    left: 9vw;
+}
+
+#name9, #name10 {
+    left: 5.2vw;
+}
+
+#deal_btn{
+    position: absolute;
+    top: 88vh;
+    left: 85vw;
+    background-image: url(/images/btn_deal_up.png);
+    height: 6vh;
+    width: 10vw;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#deal_btn:hover {
+    background-image: url(/images/btn_deal_down.png);
+
+}
+
+#deal_btn img {
+
+}
+
+.flop {
+    top: 46vh;
+    box-shadow: -1px 0px 2px #303030;
+
+}
+
+#flopa {
+    left: 28vw;
+}
+
+#flopb {
+   left: 37vw;
+}
+
+#flopc {
+    left: 46vw;
+}
+
+#turn {
+    left: 55vw;
+}
+
+#river {
+    left: 64vw;
+}
+
+#hand_description{
+    position: absolute;
+    color: white;
+    font-size: 3vh;
+    font-family: Helvetica Neue, Helvetica, Arial;
+    top: 67vh;
+    left: 34.5vw;
+    width: 30vw;
+    aaaborder: 2px solid blue;
+    text-align: center;
+    font-family: nissan-med;
+}
+
+.pred{
+    background-image: url('/images/FinalHand_Name_Red.png');
+    color:#ffffff;
+    font-size: 2.0vh;
+    width: 12vw;
+    height: 5vh;
+    line-height: 5vh;
+    text-align: center;
+    font-family: nissan-reg;
+}
+
+.pgrey{
+    background-image: url('/images/FinalHand_Name_Grey.png');
+    color:#000000;
+    font-size: 2.0vh;
+    width: 12vw;
+    height: 5vh;
+    line-height: 5vh;
+    text-align: center;
+    font-family: nissan-reg;
+
+}
+
+.mucked {
+    opacity: 0.7 !important;
+    text-decoration: line-through;
+    color: black;
+}
+
+.flat_brown_button {
+    -moz-box-shadow:inset 0px 1px 0px 0px #110803;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #110803;
+    box-shadow:inset 0px 1px 0px 0px #1c1226;
+    background: #c61633;
+    text-indent:0;
+    border:1px solid #110803;
+    display:inline-block;
+    color:#ffffff;
+    font-family:nissan-med;
+    font-size:15px;
+    font-weight:bold;
+    font-style:normal;
+    height:40px;
+    line-height:40px;
+    width:200px;
+    text-decoration:none;
+    text-align:center;
+    text-shadow:1px 1px 0px #673306;
+}
+
+.hideme {
+    visibility: hidden;
+}
+
+/* HAND DESCRIPTION ANIMATION */
+
+.poker_card.ng-hide-remove {
+    -webkit-animation: dealHole 0.5s;
+    animation: dealHole 0.5s;
+}
+
+.hole_card.ng-hide-remove {
+    -webkit-animation: dealHoleSlideUp 0.5s;
+    animation: dealHoleSlideUp 0.5s;
+}
+
+#overlay.ng-hide-remove {
+    -webkit-animation: fadeIn 0.5s;
+    animation: fadeIn 0.5s;
+}
+
+.poker_card.ng-hide-add {
+    -webkit-animation: fadeOut 2.5s;
+    animation: fadeOut 2.5s;
+}
+
+.flipout {
+    -webkit-animation: flipOutYCardStiff 0.150s;
+    animation: flipOutYCardStiff 0.150s;
+}
+
+.flipin {
+    -webkit-animation: flipInYCardStiff 0.150s;
+    animation: flipInYCardStiff 0.150s;
+}
+
+
+
+@-webkit-keyframes dealHole {
+    from {
+        top: 50vh;
+        left: 50vw;
+        height: 0px;
+        width: 0px    }
+}
+
+@-webkit-keyframes dealHoleSlideUp {
+    from {
+        padding-top: 3vh;
+    }
+}
+
+.invisible {
+    opacity: 0;
+}
+
+.ft_background {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+}

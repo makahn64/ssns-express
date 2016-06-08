@@ -107,7 +107,7 @@ app.controller("appControlController", function($scope, $http, $interval, $timeo
                 "Jill", "Owen", "Heather", "Vivek", "Raj", "Gunther", "Arnold", "Bubba", "C.J",
                 "Jasmine", "Franz", "Hans", "Keiko", "Juan", "Guillermo", "Anthony", "Kim"];
             var lNames = ["Armmisen", "Doe", "Cooper", "Struthers", "Aaron", "Thornton", "Jones", "Jameson",
-                "Figgle", "Graham", "Kim", "Jong", "Leutter", "Pal", "Debujyoti", "Gupta", "Tashimura", "Merkel"];
+                "Figgle", "Graham", "Kim", "Jong", "Leutter", "Pal", "Debujyoti", "Gupta", "Tashimura", "Merkel", "ReallyReallyLongMcNamentong"];
             return { firstName: fNames[Math.floor(Math.random() * fNames.length)],
                 lastName: lNames[Math.floor(Math.random() * lNames.length)]};
         }

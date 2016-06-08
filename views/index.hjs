@@ -14,7 +14,7 @@
 <div class="container-fluid" style="margin-top: 20px;">
   <div class="row">
     <ul>
-      <li><a href="leaderboard.html">Show leaderboard and final table</a></li>
+      <li><a href="nissanNgApp.html">Show leaderboard and final table</a></li>
       <li><a href="gamecontrol.html">Edit/clear leaderboard</a></li>
       <li><a href="videocontrol.html">Change leaderboard video</a></li>
     </ul>

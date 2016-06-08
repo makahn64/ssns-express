@@ -1,0 +1,161 @@
+<div id="poker_table" ng-controller="gameController" ng-class="tableClass">
+<img class="ft_background" src="/images/FinalHand_BG_noftr.png"/>
+
+    <div ng-show="!showOverlay" id="chipoverlay">
+        <img src="images/FinalHand_chips_fullscreen.png"/>
+    </div>
+
+    <div ng-show="showOverlay" ng-click="tappedOverlay()" id="overlay">
+        <div id="winnername">{{winnerName}}</div>
+        <div id="isthewinner">{{isTheWinner}}</div>
+    </div>
+    <!--
+    <div ng-show="!showOverlay"  id="chipoverlay">
+    </div>
+    -->
+
+    <div ng-show="showOutroOverlay" id="outrooverlay">
+        <div class="douwant">Do you want to clear the leaderboard?</div>
+        <div class="answer">
+            <button class="flat_brown_button" ng-click="clearAndExit()">YES</button>   <button class="flat_brown_button" ng-click="justExit()">NO</button>
+        </div>
+    </div>
+
+    <!-- Seat one -->
+    <img ng-show="viewAdapter[0].showFirstCard" ng-src="{{viewAdapter[0].firstCard}}" id="seat1"
+         class="hole_card firstrow ng-cloak">
+    <img ng-show="viewAdapter[0].showSecondCard" ng-src="{{viewAdapter[0].secondCard}}" id="seat1a"
+         class="hole_card firstrow frontcard ng-cloak">
+    <div ng-click="muckPlayer(0)" ng-show="viewAdapter[0].showNamePlaque" class="name-plaque-grey frplaque name"
+         id="name1"
+         ng-class="{ pred: viewAdapter[0].isHighlighted, pgrey: !viewAdapter[0].isHighlighted, mucked: viewAdapter[0].isMucked}">
+        {{viewAdapter[0].name}}
+    </div>
+
+    <!-- Seat two -->
+    <img ng-show="viewAdapter[1].showFirstCard" ng-src="{{viewAdapter[1].firstCard}}" id="seat2"
+         class="hole_card firstrow">
+    <img ng-show="viewAdapter[1].showSecondCard" ng-src="{{viewAdapter[1].secondCard}}" id="seat2a"
+         class="hole_card firstrow frontcard">
+    <div ng-click="muckPlayer(1)" ng-show="viewAdapter[1].showNamePlaque" class="name-plaque-red frplaque name"
+         id="name2"
+         ng-class="{ pred: viewAdapter[1].isHighlighted, pgrey: !viewAdapter[1].isHighlighted, mucked: viewAdapter[1].isMucked}">
+        {{viewAdapter[1].name}}
+    </div>
+
+    <!-- Seat three -->
+    <img ng-show="viewAdapter[2].showFirstCard" ng-src="{{viewAdapter[2].firstCard}}" id="seat3"
+         class="hole_card firstrow">
+    <img ng-show="viewAdapter[2].showSecondCard" ng-src="{{viewAdapter[2].secondCard}}" id="seat3a"
+         class="hole_card firstrow frontcard">
+    <div ng-click="muckPlayer(2)" ng-show="viewAdapter[2].showNamePlaque" class="name-plaque-grey frplaque name"
+         id="name3"
+         ng-class="{ pred: viewAdapter[2].isHighlighted, pgrey: !viewAdapter[2].isHighlighted, mucked: viewAdapter[2].isMucked}">
+        {{viewAdapter[2].name}}
+    </div>
+
+    <!-- Seat four -->
+    <img ng-show="viewAdapter[3].showFirstCard" ng-src="{{viewAdapter[3].firstCard}}" id="seat4"
+         class="hole_card secondrow">
+    <img ng-show="viewAdapter[3].showSecondCard" ng-src="{{viewAdapter[3].secondCard}}" id="seat4a"
+         class="hole_card secondrow frontcard">
+    <div ng-click="muckPlayer(3)" ng-show="viewAdapter[3].showNamePlaque" class="name-plaque-grey srplaque name"
+         id="name4"
+         ng-class="{ pred: viewAdapter[3].isHighlighted, pgrey: !viewAdapter[3].isHighlighted, mucked: viewAdapter[3].isMucked}">
+        {{viewAdapter[3].name}}
+    </div>
+
+    <!-- Seat five -->
+    <img ng-show="viewAdapter[4].showFirstCard" ng-src="{{viewAdapter[4].firstCard}}" id="seat5"
+         class="hole_card thirdrow">
+    <img ng-show="viewAdapter[4].showSecondCard" ng-src="{{viewAdapter[4].secondCard}}" id="seat5a"
+         class="hole_card thirdrow frontcard">
+    <div ng-click="muckPlayer(4)" ng-show="viewAdapter[4].showNamePlaque" class="name-plaque-grey trplaque name"
+         id="name5"
+         ng-class="{ pred: viewAdapter[4].isHighlighted, pgrey: !viewAdapter[4].isHighlighted, mucked: viewAdapter[4].isMucked}">
+        {{viewAdapter[4].name}}
+    </div>
+
+    <!-- Seat six -->
+    <img ng-show="viewAdapter[5].showFirstCard" ng-src="{{viewAdapter[5].firstCard}}" id="seat6"
+         class="hole_card fourthrow">
+    <img ng-show="viewAdapter[5].showSecondCard" ng-src="{{viewAdapter[5].secondCard}}" id="seat6a"
+         class="hole_card fourthrow frontcard">
+    <div ng-click="muckPlayer(5)" ng-show="viewAdapter[5].showNamePlaque" class="name-plaque-grey fthrplaque name"
+         id="name6"
+         ng-class="{ pred: viewAdapter[5].isHighlighted, pgrey: !viewAdapter[5].isHighlighted, mucked: viewAdapter[5].isMucked}">
+        {{viewAdapter[5].name}}
+    </div>
+
+    <!-- Seat 7 -->
+    <img ng-show="viewAdapter[6].showFirstCard" ng-src="{{viewAdapter[6].firstCard}}" id="seat7"
+         class="hole_card fourthrow">
+    <img ng-show="viewAdapter[6].showSecondCard" ng-src="{{viewAdapter[6].secondCard}}" id="seat7a"
+         class="hole_card fourthrow frontcard">
+    <div ng-click="muckPlayer(6)" ng-show="viewAdapter[6].showNamePlaque" class="name-plaque-grey fthrplaque name"
+         id="name7"
+         ng-class="{ pred: viewAdapter[6].isHighlighted, pgrey: !viewAdapter[6].isHighlighted, mucked: viewAdapter[6].isMucked}">
+        {{viewAdapter[6].name}}
+    </div>
+
+    <!-- Seat 8 -->
+    <img ng-show="viewAdapter[7].showFirstCard" ng-src="{{viewAdapter[7].firstCard}}" id="seat8"
+         class="hole_card fourthrow">
+    <img ng-show="viewAdapter[7].showSecondCard" ng-src="{{viewAdapter[7].secondCard}}" id="seat8a"
+         class="hole_card fourthrow frontcard">
+    <div ng-click="muckPlayer(7)" ng-show="viewAdapter[7].showNamePlaque" class="name-plaque-grey fthrplaque name"
+         id="name8"
+         ng-class="{ pred: viewAdapter[7].isHighlighted, pgrey: !viewAdapter[7].isHighlighted, mucked: viewAdapter[7].isMucked}">
+        {{viewAdapter[7].name}}
+    </div>
+
+    <!-- Seat 9 -->
+    <img ng-show="viewAdapter[8].showFirstCard" ng-src="{{viewAdapter[8].firstCard}}" id="seat9"
+         class="hole_card thirdrow">
+    <img ng-show="viewAdapter[8].showSecondCard" ng-src="{{viewAdapter[8].secondCard}}" id="seat9a"
+         class="hole_card thirdrow frontcard">
+    <div ng-click="muckPlayer(8)" ng-show="viewAdapter[8].showNamePlaque" class="name-plaque-grey trplaque name"
+         id="name9"
+         ng-class="{ pred: viewAdapter[8].isHighlighted, pgrey: !viewAdapter[8].isHighlighted, mucked: viewAdapter[8].isMucked}">
+        {{viewAdapter[8].name}}
+    </div>
+
+    <!-- Seat 10 -->
+    <img ng-show="viewAdapter[9].showFirstCard" ng-src="{{viewAdapter[9].firstCard}}" id="seat10"
+         class="hole_card secondrow">
+    <img ng-show="viewAdapter[9].showSecondCard" ng-src="{{viewAdapter[9].secondCard}}" id="seat10a"
+         class="hole_card secondrow frontcard">
+    <div ng-click="muckPlayer(9)" ng-show="viewAdapter[9].showNamePlaque" class="name-plaque-grey srplaque name"
+         id="name10"
+         ng-class="{ pred: viewAdapter[9].isHighlighted, pgrey: !viewAdapter[9].isHighlighted, mucked: viewAdapter[9].isMucked }">
+        {{viewAdapter[9].name}}
+    </div>
+
+
+
+    <!-- Flop, Turn and River -->
+
+    <img ng-click="nextRound()" ng-src="{{flopA}}" id="flopa" class="poker_card flop"
+         ng-class="{ flipout: flopOutAnim[0], flipin: flopInAnim[0] }">
+    <img ng-click="nextRound()" ng-src="{{flopB}}" id="flopb" class="poker_card flop"
+         ng-class="{ flipout: flopOutAnim[1], flipin: flopInAnim[1] }">
+    <img ng-click="nextRound()" ng-src="{{flopC}}" id="flopc" class="poker_card flop"
+         ng-class="{ flipout: flopOutAnim[2], flipin: flopInAnim[2] }">
+
+    <img ng-click="nextRound()" ng-src="{{turn}}" id="turn" class="poker_card flop"
+         ng-class="{ flipout: flopOutAnim[3], flipin: flopInAnim[3] }">
+    <img ng-click="nextRound()" ng-src="{{river}}" id="river" class="poker_card flop"
+         ng-class="{ flipout: flopOutAnim[4], flipin: flopInAnim[4] }">
+
+
+
+
+    <div id="hand_description">{{handDescription | uppercase}}</div>
+    <!--<img src="img/pngcards/king_of_diamonds.png" id="test_card_2">-->
+
+    <div ng-hide="hideDealButton" id="deal_btn" ng-click="nextRound()"></div>
+
+    <img id="clear-button-ft" src="images/clearbutton.png" ng-click="logoClicked()">
+
+
+</div>

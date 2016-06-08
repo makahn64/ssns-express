@@ -1,0 +1,23 @@
+{
+  "name": "assets",
+  "homepage": "https://github.com/makahn64/ssns-express",
+  "authors": [
+    "Mitch Kahn <mitch@appdelegates.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-ui-router": "^0.2.18",
+    "angular-gestures": "^0.3.1",
+    "angular-animate": "^1.5.5"
+  }
+}

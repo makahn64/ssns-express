@@ -1,5 +1,9 @@
 <div id="poker_table" ng-controller="gameController" ng-class="tableClass">
 
+    <div ng-show="!showOverlay" id="chipoverlay">
+        <img src="images/FinalHand_chips_fullscreen.png"/>
+    </div>
+
     <div ng-show="showOverlay" ng-click="tappedOverlay()" id="overlay">
         <div id="winnername">{{winnerName}}</div>
         <div id="isthewinner">{{isTheWinner}}</div>
@@ -106,9 +110,7 @@
     <img ng-click="nextRound()" ng-src="{{river}}" id="river" class="poker_card flop" ng-class="{ flipout: flopOutAnim[4], flipin: flopInAnim[4] }">
 
 
-    <div ng-show="!showOverlay"  id="chipoverlay">
-      <img src="images/FinalHand_chips_fullscreen.png"/>
-    </div>
+
 
     <div id="hand_description">{{handDescription | uppercase}}</div>
     <!--<img src="img/pngcards/king_of_diamonds.png" id="test_card_2">-->

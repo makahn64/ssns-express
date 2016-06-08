@@ -6,7 +6,7 @@ app.controller( "lbController", function ( $scope, $http, $interval, $timeout, $
 
     // 15 seconds per build, 4 per minute, 20/4 = 5 minutes
     // 11-11 client wants 15 minutes, 60 is the number.
-    var VID_TO_LB_RATIO = 3; //4 * 15;
+    var VID_TO_LB_RATIO = 4 * 15;
 
     //var BUILD_SPEED = "oncrack";
     var BUILD_SPEED = "normal";
